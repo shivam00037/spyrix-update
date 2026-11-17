@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#e10a23" />
+<title>Online Invoice Maker | GST Billing &amp; Business Management Software | SPYRIX</title>
+<meta name="description" content="Create professional invoices online with SPYRIX Invoice Maker. Manage GST billing, customers, products, payments, inventory and expenses." />
+<meta name="keywords" content="invoice maker, online invoice maker, GST invoice maker India, billing software, business management software" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{--red:#e10a23;--deep:#7a0614;--rose:#ffe8ea;--ink:#1a0c0e;--mute:#6f5a5d;--line:#f3cfd3;--h:'Unbounded','Arial Black',sans-serif;--b:'DM Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+#home,#toolkit,#how-it-works,#faq,#about,#feedback{scroll-margin-top:96px}
+body{background:#fff;color:var(--ink);font-family:var(--b);line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+svg{display:block}
+
+/* Loader: red curtain with white wordmark */
+.loader{position:fixed;inset:0;z-index:100;background:var(--red);display:grid;place-items:center;color:#fff;transition:transform .8s cubic-bezier(.77,0,.18,1) .2s,visibility 0s 1s}
+.loader.is-hidden{transform:translateY(-101%);visibility:hidden;pointer-events:none}
+.loader-word{font:900 clamp(44px,11vw,120px)/1 var(--h);letter-spacing:-.03em;clip-path:inset(0 100% 0 0);animation:wipe 1.3s cubic-bezier(.7,0,.2,1) .15s forwards}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+.loader-line{width:min(260px,60vw);height:3px;background:rgba(255,255,255,.3);margin:20px auto 0;overflow:hidden}
+.loader-line i{display:block;height:100%;background:#fff;animation:fill 2s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes fill{from{width:0}to{width:100%}}
+
+/* Header */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:24px;padding:12px clamp(18px,4vw,60px);background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:block;width:170px;height:48px}
+.brand img{width:100%;height:100%;object-fit:contain;object-position:left}
+.brand .fb{display:none;font:900 22px var(--h);color:var(--red)}
+.nav{display:flex;gap:4px;margin:0 auto}
+.nav a{padding:9px 16px;font-weight:700;font-size:14px;color:var(--mute);border-radius:100px;transition:.2s}
+.nav a:hover{color:var(--red);background:var(--rose)}
+.nav a.on{color:#fff;background:var(--red)}
+.acts{display:flex;gap:10px;align-items:center}
+.btn{position:relative;border:2px solid var(--ink);background:#fff;color:var(--ink);padding:12px 24px;border-radius:100px;font-weight:700;font-size:14px;transition:.25s}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.hot{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 10px 28px rgba(225,10,35,.35)}
+.btn.hot:hover{background:var(--deep);border-color:var(--deep);transform:translateY(-3px)}
+.big{padding:17px 34px;font-size:16px}
+.menu{display:none;width:42px;height:42px;border-radius:50%;border:2px solid var(--red);background:#fff;color:var(--red);font-size:18px}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:10px;padding:110px clamp(20px,5vw,80px) 60px;max-width:1500px;margin:auto}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.hero-bg svg{position:absolute;right:-6%;top:-4%;width:62%;height:auto;opacity:.9}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:100px;background:var(--rose);color:var(--deep);font-weight:700;font-size:13px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--red);animation:ping 1.8s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(225,10,35,.6)}80%,100%{box-shadow:0 0 0 10px rgba(225,10,35,0)}}
+h1{margin:22px 0;font:900 clamp(40px,5.8vw,88px)/.98 var(--h);letter-spacing:-.05em}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
+h1 .ln span{display:inline-block;transform:translateY(115%) rotate(4deg);animation:up .9s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(2.2s + var(--d)*.14s)}
+h1 .r{color:var(--red)}
+h1 .u{position:relative;color:var(--red)}
+@keyframes up{to{transform:none}}
+.lede{max-width:500px;color:var(--mute);font-size:17px;opacity:0;animation:fade .8s 2.9s forwards}.lede b{color:var(--ink)}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;opacity:0;animation:fade .8s 3.1s forwards}
+.stats{display:flex;gap:34px;margin-top:40px;opacity:0;animation:fade .8s 3.3s forwards}
+.stats b{display:block;font:900 30px var(--h);color:var(--red);letter-spacing:-.04em}.stats span{font-size:13px;color:var(--mute)}
+@keyframes fade{to{opacity:1}}
+
+/* Hero SVG art */
+.art{opacity:0;animation:fade 1.2s 2.5s forwards}
+.art svg{width:100%;height:auto;overflow:visible}
+.spin{transform-origin:300px 300px;transform-box:view-box;animation:rot 40s linear infinite}
+.spin.rev{animation-duration:26s;animation-direction:reverse}
+@keyframes rot{to{transform:rotate(360deg)}}
+.fl{animation:flt 6s ease-in-out infinite}.fl.b{animation-delay:-2s}.fl.c{animation-delay:-4s}
+@keyframes flt{50%{transform:translateY(-14px)}}
+.bar{transform-origin:bottom;transform-box:fill-box;animation:grow 1.2s cubic-bezier(.2,.8,.2,1) both}
+.bar:nth-child(1){animation-delay:3s}.bar:nth-child(2){animation-delay:3.2s}.bar:nth-child(3){animation-delay:3.4s}.bar:nth-child(4){animation-delay:3.6s}
+@keyframes grow{from{transform:scaleY(0)}}
+.draw{stroke-dasharray:160;stroke-dashoffset:160;animation:dr 1s 4s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.tw{animation:tw 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes tw{50%{transform:scale(.4) rotate(45deg);opacity:.4}}
+
+/* Marquee */
+.marq{background:var(--red);color:#fff;overflow:hidden;padding:16px 0;transform:rotate(-1.2deg);margin:0 -2% ;box-shadow:0 14px 40px rgba(225,10,35,.3)}
+.marq div{display:flex;gap:36px;width:max-content;animation:slide 28s linear infinite}
+.marq span{font:900 22px var(--h);letter-spacing:-.03em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:36px}
+.marq span::after{content:"";width:14px;height:14px;background:#fff;transform:rotate(45deg)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Sections */
+.sec{max-width:1320px;margin:auto;padding:120px clamp(20px,4vw,50px) 10px}
+.kick{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:13px;color:var(--red)}
+.kick::before{content:"";width:34px;height:3px;background:var(--red)}
+.sec h2{margin-top:12px;font:900 clamp(32px,4.8vw,66px)/1.02 var(--h);letter-spacing:-.05em;max-width:860px}
+.sec h2 em{font-style:normal;color:var(--red)}
+.sec>p{margin-top:16px;max-width:540px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.card{position:relative;padding:36px 30px 30px;min-height:240px;background:#fff;transition:transform .3s}
+.card:hover{transform:translateY(-8px)}
+.card.w{grid-column:span 2}
+.card.red{background:var(--red);color:#fff}.card.red p{color:#ffdadd}.card.red .ic{stroke:#fff}
+.card .ic{width:56px;height:56px;margin-bottom:20px;stroke:var(--red);fill:none;stroke-width:2}
+.card h3{font:700 19px var(--h);letter-spacing:-.04em;margin-bottom:8px}
+.card p{color:var(--mute);font-size:15px}
+.card>svg.fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.fr .bd{fill:none;stroke:var(--red);stroke-width:2;stroke-dasharray:6 6;opacity:.5;transition:.3s}
+.fr .sd{fill:var(--rose)}
+.fr .kn{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round}
+.card.red .bd{stroke:#fff}.card.red .sd{fill:rgba(255,255,255,.14)}.card.red .kn{stroke:#fff}
+.card:hover .bd{opacity:1;stroke-dasharray:none}
+.card>*:not(svg.fr){position:relative;z-index:2}
+
+/* Steps in a red band with SVG wave */
+.band{position:relative;margin-top:130px;background:var(--red);color:#fff;padding:70px 0 110px}
+.band .wv{position:absolute;left:0;width:100%;height:60px}
+.band .wv.t{top:-59px}.band .wv.bt{bottom:-1px;transform:rotate(180deg)}
+.band::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.2) 1.5px,transparent 2px) 0 0/26px 26px;opacity:.6}
+.band .sec{position:relative;padding-top:40px}
+.band .kick,.band h2 em{color:#fff}.band .kick::before{background:#fff}
+.band h2 em{text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:8px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;position:relative}
+.step{position:relative;padding:32px 30px;background:#fff;color:var(--ink);border-radius:6px 28px 6px 28px;box-shadow:0 20px 40px rgba(80,0,10,.25)}
+.step em{display:block;font:900 70px/1 var(--h);font-style:normal;color:var(--rose);letter-spacing:-.06em}
+.step h3{font:700 22px var(--h);letter-spacing:-.04em;margin:-6px 0 8px;color:var(--red)}
+.step p{color:var(--mute);font-size:15px}
+.step::after{content:"";position:absolute;top:50%;right:-22px;width:22px;height:3px;background:#fff}
+.step:last-child::after{display:none}
+
+.finale{position:relative;margin:110px clamp(16px,4vw,50px) 0;padding:100px 24px;text-align:center;border-radius:34px;background:var(--ink);color:#fff;overflow:hidden}
+.finale svg{position:absolute;inset:0;width:100%;height:100%}
+.finale h2{position:relative;font:900 clamp(36px,6.4vw,92px)/1 var(--h);letter-spacing:-.06em}
+.finale h2 em{font-style:normal;color:var(--red)}
+.finale p{position:relative;margin:20px auto 32px;max-width:460px;color:#d9c7ca}
+.finale .btn{position:relative}
+footer{margin-top:80px;border-top:1px solid var(--line)}
+.fm{max-width:1320px;margin:auto;padding:50px clamp(20px,4vw,50px);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
+.fm img{width:170px;height:56px;object-fit:contain;object-position:left}
+.fm p{color:var(--mute);font-size:14px;max-width:280px;margin-top:12px}
+.fm h4{font:700 14px var(--h);letter-spacing:-.03em;color:var(--red);margin-bottom:12px}
+.fm a{display:block;color:var(--mute);font-size:14px;margin:8px 0;transition:.2s}
+.fm a:hover{color:var(--red);transform:translateX(4px)}
+.fb2{max-width:1320px;margin:auto;padding:18px clamp(20px,4vw,50px) 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--mute);font-size:13px}
+.fb2 b{color:var(--red)}
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s,transform .9s cubic-bezier(.16,1,.3,1)}.rv.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+.nav{position:absolute;top:68px;left:0;right:0;display:none;flex-direction:column;background:#fff;padding:10px;border-bottom:3px solid var(--red)}
+.nav.open{display:flex}.menu{display:block}.acts .login{display:none}
+.hero{grid-template-columns:1fr;padding-top:100px}.art{max-width:440px;margin:0 auto;order:-1}
+.hero-bg svg{width:110%;right:-30%}
+.grid,.flow{grid-template-columns:1fr}.card.w{grid-column:auto}.step::after{display:none}
+.fm{grid-template-columns:1fr 1fr}.fm>div:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}
+h1 .ln span,.lede,.cta,.stats,.art{opacity:1!important;transform:none!important}.loader-word{clip-path:none}.rv{opacity:1;transform:none}.draw{stroke-dashoffset:0}}
+
+
+/* Keep the layout from the supplied red/white intro, but cycle its whole accent palette
+   from red to vivid neon green and smoothly back on desktop and mobile. */
+@keyframes spyrix-intro-colour-cycle {
+  0%, 10%, 88%, 100% { filter: hue-rotate(0deg) saturate(1.04); }
+  38%, 62% { filter: hue-rotate(118deg) saturate(1.18); }
+}
+@keyframes spyrix-feedback-orbit { to { transform: rotate(360deg); } }
+.top, .hero, .marq, main > .sec, .band, .finale, .feedback-zone, footer {
+  animation: spyrix-intro-colour-cycle 8s ease-in-out infinite;
+  will-change: filter;
+}
+.pill i { animation-duration: 4s; }
+.feedback-zone { position:relative; isolation:isolate; margin:110px clamp(16px,4vw,50px) 0; padding:clamp(30px,6vw,72px); overflow:hidden; border:1px solid var(--line); border-radius:28px; background:linear-gradient(145deg,#fff,var(--rose)); }
+.feedback-zone::before { content:""; position:absolute; z-index:-1; width:360px; height:360px; right:-120px; top:-150px; border:1px dashed rgba(225,10,35,.25); border-radius:50%; box-shadow:0 0 0 28px rgba(225,10,35,.035),0 0 0 60px rgba(225,10,35,.025); animation:spyrix-feedback-orbit 38s linear infinite; }
+.feedback-layout { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(26px,5vw,70px); align-items:center; max-width:1220px; margin:auto; }
+.feedback-copy h2 { margin:14px 0; font:900 clamp(32px,4.2vw,56px)/1.03 var(--h); letter-spacing:-.055em; }
+.feedback-copy h2 em { color:var(--red); font-style:normal; }
+.feedback-copy p { max-width:440px; color:var(--mute); }
+.feedback-mini { display:flex; gap:10px; align-items:center; margin-top:22px; color:var(--mute); font-size:13px; font-weight:700; }
+.feedback-mini .dot { width:10px; height:10px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 6px rgba(34,197,94,.1); }
+.feedback-form { background:#fff; border:1px solid #f1c6cc; border-radius:20px; padding:clamp(20px,3vw,32px); box-shadow:0 22px 60px rgba(122,6,20,.09); }
+.feedback-form h3 { font:700 19px var(--h); margin-bottom:5px; }
+.feedback-form .hint { color:var(--mute); font-size:13px; margin-bottom:20px; }
+.feedback-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.feedback-field { display:flex; flex-direction:column; gap:6px; min-width:0; }
+.feedback-field.full { grid-column:1/-1; }
+.feedback-field label { font-size:12px; font-weight:700; color:var(--ink); }
+.feedback-field input,.feedback-field textarea,.feedback-field select { width:100%; border:1px solid #ead4d7; border-radius:11px; background:#fff; color:var(--ink); font:500 14px var(--b); padding:13px 14px; outline:none; transition:border-color .2s,box-shadow .2s; }
+.feedback-field input:focus,.feedback-field textarea:focus,.feedback-field select:focus { border-color:var(--red); box-shadow:0 0 0 3px rgba(225,10,35,.09); }
+.feedback-field textarea { min-height:130px; resize:vertical; }
+.feedback-submit { width:100%; margin-top:16px; }
+.feedback-status { min-height:20px; margin-top:12px; font-size:13px; font-weight:700; color:var(--deep); }
+.feedback-status.error { color:#b91c1c; }
+.feedback-honeypot { position:absolute!important; left:-10000px!important; width:1px!important; height:1px!important; overflow:hidden!important; }
+@media(max-width:760px) {
+  .feedback-layout { grid-template-columns:1fr; gap:24px; }
+  .feedback-zone { margin:64px 12px 0; padding:24px 16px; border-radius:20px; }
+  .feedback-form { padding:18px 15px; border-radius:16px; }
+  .feedback-fields { grid-template-columns:1fr; gap:12px; }
+  .feedback-field.full { grid-column:auto; }
+  .feedback-field input,.feedback-field textarea,.feedback-field select { font-size:16px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .feedback-zone::before { animation:none; }
+  /* Colour changes are a deliberate brand cue; keep this gentle, non-spatial cycle running. */
+  .top, .hero, .marq, main > .sec, .band, .finale, .feedback-zone, footer {
+    animation-name: spyrix-intro-colour-cycle !important;
+    animation-duration: 8s !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+    animation-delay: 0s !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <div class="site-loader" id="siteLoader" role="status" aria-label="SPYRIX is loading">
+    <div class="spyrix-loader-stage">
+      <div class="spyrix-macbook">
+        <div class="spyrix-macbook-inner">
+          <div class="spyrix-macbook-screen">
+            <div class="spyrix-macbook-screen-face">
+              <span class="spyrix-macbook-camera"></span>
+              <div class="spyrix-macbook-display"><span class="spyrix-macbook-brand">SPYRIX</span><span class="spyrix-macbook-shade"></span></div>
+            </div>
+            <span class="spyrix-macbook-lid-logo">SX</span>
+          </div>
+          <div class="spyrix-macbook-body">
+            <div class="spyrix-macbook-body-face">
+              <div class="spyrix-macbook-touchpad"></div>
+              <div class="spyrix-macbook-keyboard"><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key space"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span><span class="spyrix-macbook-key function"></span></div>
+            </div>
+            <span class="spyrix-macbook-pad one"></span><span class="spyrix-macbook-pad two"></span>
+            <span class="spyrix-macbook-pad three"></span><span class="spyrix-macbook-pad four"></span>
+          </div>
+        </div>
+        <span class="spyrix-macbook-shadow"></span>
+      </div>
+    </div>
+  </div>
+
+<header class="top">
+  <a class="brand" href="#home" aria-label="SPYRIX INVOICE home"><img src="/assets/branding/spyrix-master-lockup.png" alt="SPYRIX" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" /><span class="fb">SPYRIX</span></a>
+  <nav class="nav" id="navLinks" aria-label="Main navigation">
+    <a class="on" href="#home">Home</a><a href="#toolkit">Features</a><a href="#how-it-works">How it works</a><a href="#faq">FAQ</a><a href="#about">About</a>
+  </nav>
+  <div class="acts">
+    <a class="btn login" href="#" id="loginLink">Login</a>
+    <button class="btn hot" data-enter>Get started</button>
+    <button class="menu" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="290" fill="#ffe8ea"/><circle cx="300" cy="300" r="210" fill="#ffd3d7"/></svg>
+  </div>
+  <div>
+    <div class="pill"><i></i>Online invoice maker · Business workspace</div>
+    <h1><span class="ln"><span style="--d:0">Online invoice</span></span><span class="ln"><span style="--d:1" class="r">maker for your</span></span><span class="ln"><span style="--d:2">business.</span></span></h1>
+    <p class="lede"><b>SPYRIX Invoice</b> helps you create professional invoices online and manage GST billing, customers, products, payments, inventory, quotations and expenses in one business management workspace.</p>
+    <div class="cta"><button class="btn hot big" data-enter>Create your workspace</button><a class="btn big" href="#toolkit">See features</a></div>
+    <div class="stats"><div><b>20</b><span>Invoice layouts</span></div><div><b>GST</b><span>Ready fields</span></div><div><b>1</b><span>Connected workspace</span></div></div>
+  </div>
+
+  <div class="art">
+    <svg viewBox="0 0 600 600" role="img" aria-label="Illustration of stacked invoices, a rising bar chart, a coin and a paid check mark inside rotating red rings">
+      <defs>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4d62"/><stop offset="1" stop-color="#b3061b"/></linearGradient>
+        <filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#7a0614" flood-opacity=".28"/></filter>
+      </defs>
+      <circle cx="300" cy="300" r="250" fill="url(#rg)"/>
+      <g class="spin" fill="none" stroke="#fff"><circle cx="300" cy="300" r="278" stroke-opacity=".7" stroke-dasharray="4 12" stroke-width="3" stroke-linecap="round"/><circle cx="300" cy="300" r="296" stroke="#e10a23" stroke-width="2" stroke-dasharray="90 40"/></g>
+      <g class="spin rev" fill="none" stroke="#fff" stroke-opacity=".5"><circle cx="300" cy="300" r="225" stroke-dasharray="2 9" stroke-width="3" stroke-linecap="round"/></g>
+      <!-- back sheets -->
+      <g filter="url(#sh)">
+        <rect x="190" y="130" width="210" height="270" rx="16" fill="#ffd3d7" transform="rotate(-10 295 265)"/>
+        <rect x="190" y="130" width="210" height="270" rx="16" fill="#ffe8ea" transform="rotate(-4 295 265)"/>
+      </g>
+      <!-- main invoice -->
+      <g class="fl" filter="url(#sh)">
+        <rect x="195" y="120" width="215" height="285" rx="18" fill="#fff"/>
+        <path d="M195 138a18 18 0 0 1 18-18h179a18 18 0 0 1 18 18v38H195z" fill="#e10a23"/>
+        <text x="215" y="156" fill="#fff" font-family="Unbounded,Arial Black,sans-serif" font-weight="900" font-size="17" letter-spacing="-1">INVOICE</text>
+        <text x="215" y="170" fill="#ffd3d7" font-family="DM Sans,sans-serif" font-weight="700" font-size="9">SPYRIX001 · GST</text>
+        <g stroke="#f3cfd3" stroke-width="5" stroke-linecap="round"><path d="M215 204h120M215 226h95M215 248h110M215 270h70"/></g>
+        <path d="M215 296h175" stroke="#e10a23" stroke-width="2" stroke-dasharray="5 5"/>
+        <text x="215" y="334" fill="#1a0c0e" font-family="Unbounded,Arial Black,sans-serif" font-weight="900" font-size="24" letter-spacing="-1.5">₹ 77,880</text>
+        <text x="215" y="352" fill="#6f5a5d" font-family="DM Sans,sans-serif" font-size="10">Total due</text>
+        <circle cx="365" cy="355" r="27" fill="#e10a23"/><path class="draw" d="M352 355l9 9 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- chart card -->
+      <g class="fl b" filter="url(#sh)">
+        <rect x="395" y="250" width="150" height="130" rx="16" fill="#fff"/>
+        <g fill="#ffb3bb"><rect class="bar" x="414" y="318" width="18" height="38" rx="4"/><rect class="bar" x="440" y="300" width="18" height="56" rx="4"/></g>
+        <g fill="#e10a23"><rect class="bar" x="466" y="284" width="18" height="72" rx="4"/><rect class="bar" x="492" y="266" width="18" height="90" rx="4"/></g>
+        <path d="M410 364h110" stroke="#f3cfd3" stroke-width="2"/>
+      </g>
+      <!-- coin -->
+      <g class="fl c" filter="url(#sh)">
+        <circle cx="110" cy="360" r="46" fill="#fff"/><circle cx="110" cy="360" r="36" fill="none" stroke="#e10a23" stroke-width="3" stroke-dasharray="4 5"/>
+        <text x="110" y="372" text-anchor="middle" fill="#e10a23" font-family="Unbounded,Arial Black,sans-serif" font-weight="900" font-size="34">₹</text>
+      </g>
+      <!-- tag chips -->
+      <g class="fl b" font-family="DM Sans,sans-serif" font-weight="700" font-size="12">
+        <rect x="70" y="150" width="112" height="34" rx="17" fill="#1a0c0e"/><circle cx="90" cy="167" r="5" fill="#2bd67b"/><text x="102" y="171" fill="#fff">Payment in</text>
+      </g>
+      <g class="fl" font-family="DM Sans,sans-serif" font-weight="700" font-size="12">
+        <rect x="400" y="450" width="124" height="34" rx="17" fill="#fff"/><circle cx="420" cy="467" r="5" fill="#e10a23"/><text x="432" y="471" fill="#1a0c0e">Stock synced</text>
+      </g>
+      <!-- sparkles -->
+      <g fill="#e10a23"><path class="tw" d="M520 120l5 14 14 5-14 5-5 14-5-14-14-5 14-5z"/><path class="tw" style="animation-delay:-1s" d="M70 470l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#fff"/><path class="tw" style="animation-delay:-2s" d="M300 40l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/></g>
+    </svg>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div>
+  <span>Invoices</span><span>GST billing</span><span>Customers</span><span>Payments</span><span>Inventory</span><span>Quotations</span><span>Expenses</span><span>Reports</span>
+  <span>Invoices</span><span>GST billing</span><span>Customers</span><span>Payments</span><span>Inventory</span><span>Quotations</span><span>Expenses</span><span>Reports</span>
+</div></div>
+
+<section class="sec" id="toolkit">
+  <div class="kick">Built for everyday business</div>
+  <h2 class="rv">Everything your business needs, <em>in one place.</em></h2>
+  <p class="rv">Connected tools for invoices, customers, products, payments, expenses and reports. Enter details once and reuse them everywhere.</p>
+  <div class="grid">
+    <article class="card frame red w rv"><svg class="ic" viewBox="0 0 56 56"><path d="M13 6h24l10 10v34H13z"/><path d="M37 6v10h10M21 28h18M21 36h18M21 44h10"/></svg><h3>Invoice Studio</h3><p>Choose from 20 layouts, add your logo, colours and payment QR, then preview and issue. GSTIN fields and tax rates are built in.</p></article>
+    <article class="card frame rv"><svg class="ic" viewBox="0 0 56 56"><circle cx="28" cy="20" r="9"/><path d="M9 50c2-11 11-16 19-16s17 5 19 16"/></svg><h3>Customers</h3><p>Save billing, shipping and GST details once. Find anyone by name or customer ID.</p></article>
+    <article class="card frame rv"><svg class="ic" viewBox="0 0 56 56"><path d="M28 6l20 11v23L28 51 8 40V17z"/><path d="M8 17l20 11 20-11M28 28v23"/></svg><h3>Products &amp; stock</h3><p>One catalogue for prices, tax defaults and quantities, with low-stock alerts.</p></article>
+    <article class="card frame w rv"><svg class="ic" viewBox="0 0 56 56"><rect x="6" y="14" width="44" height="30" rx="4"/><path d="M6 24h44M14 36h10"/></svg><h3>Payments &amp; receipts</h3><p>Record full or partial payments, match them to invoices and see exactly what is still outstanding.</p></article>
+    <article class="card frame rv"><svg class="ic" viewBox="0 0 56 56"><path d="M8 46h40M14 38V26M24 38V14M34 38V30M44 38V20"/></svg><h3>Reports</h3><p>Review collections, pending balances, expenses and stock, then export your data.</p></article>
+    <article class="card frame w rv"><svg class="ic" viewBox="0 0 56 56"><path d="M10 10h36v36H10z"/><path d="M18 22h20M18 31h13"/><path d="M42 42l8 8"/></svg><h3>Quotations &amp; expenses</h3><p>Send estimates, log running costs and keep every business record in the same place.</p></article>
+  </div>
+</section>
+
+<section class="band" id="how-it-works">
+  <svg class="wv t" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60V30C150 0 300 0 450 24s300 36 450 12 225-30 300-18v42z" fill="#e10a23"/></svg>
+  <div class="sec">
+    <div class="kick">A clear workflow</div>
+    <h2 class="rv">From first customer to <em>paid invoice.</em></h2>
+    <div class="flow">
+      <div class="step rv"><em>01</em><h3>Set up</h3><p>Add your business profile, customers, products and invoice defaults.</p></div>
+      <div class="step rv"><em>02</em><h3>Create</h3><p>Build invoices or quotations from saved details and check the totals.</p></div>
+      <div class="step rv"><em>03</em><h3>Collect</h3><p>Record payments, follow balances and read the reports.</p></div>
+    </div>
+  </div>
+  <svg class="wv bt" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60V30C150 0 300 0 450 24s300 36 450 12 225-30 300-18v42z" fill="#fff"/></svg>
+</section>
+
+<section class="sec" id="faq" style="padding-top:60px">
+  <div class="kick">Common questions</div>
+  <h2 class="rv">Quick <em>answers.</em></h2>
+  <div class="grid">
+    <article class="card frame rv"><h3>What is SPYRIX Invoice?</h3><p>A browser-based workspace for invoices, customer records, products, payments and reports.</p></article>
+    <article class="card frame rv"><h3>Can I make GST invoices?</h3><p>Yes. Layouts include GSTIN fields and configurable tax rates, shown in the preview and exported document.</p></article>
+    <article class="card frame rv"><h3>Payments and stock?</h3><p>Yes. Record full or partial payments, see outstanding balances and watch low-stock items.</p></article>
+  </div>
+</section>
+
+<section class="finale" id="about">
+  <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#e10a23" stroke-opacity=".55" stroke-width="2"><circle cx="1050" cy="80" r="150"/><circle cx="1050" cy="80" r="220" stroke-dasharray="6 10"/><circle cx="130" cy="440" r="120"/><circle cx="130" cy="440" r="190" stroke-dasharray="6 10"/></g>
+    <path d="M0 500L260 330l140 90 200-170 180 130 200-150 220 160v110z" fill="#e10a23" fill-opacity=".16"/>
+  </svg>
+  <h2 class="rv">Run your business with <em>more clarity.</em></h2>
+  <p class="rv">Customers, invoices, payments and inventory, together in one workspace.</p>
+  <button class="btn hot big" data-enter>Get started</button>
+</section>
+</main>
+
+
+<section class="feedback-zone" id="feedback" aria-labelledby="feedbackTitle">
+  <div class="feedback-layout">
+    <div class="feedback-copy">
+      <div class="kick">Your voice shapes SPYRIX</div>
+      <h2 id="feedbackTitle">Help us make it <em>better.</em></h2>
+      <p>Tell us what feels great, what is confusing, and what would make SPYRIX Invoice more useful for your business. Every message goes to our team.</p>
+      <div class="feedback-mini"><span class="dot" aria-hidden="true"></span><span>Real feedback · Better business tools</span></div>
+    </div>
+    <form class="feedback-form" id="introFeedbackForm">
+      <h3>Share your feedback</h3>
+      <p class="hint">Name, email and a few words about your experience.</p>
+      <div class="feedback-fields">
+        <div class="feedback-field"><label for="introFeedbackName">Your name</label><input id="introFeedbackName" name="name" autocomplete="name" minlength="2" maxlength="100" placeholder="Full name" required /></div>
+        <div class="feedback-field"><label for="introFeedbackEmail">Email address</label><input id="introFeedbackEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required /></div>
+        <div class="feedback-field full"><label for="introFeedbackRating">How was your experience? (optional)</label><select id="introFeedbackRating" name="rating"><option value="">Choose a rating</option><option value="5">★★★★★ — Excellent</option><option value="4">★★★★ — Good</option><option value="3">★★★ — Okay</option><option value="2">★★ — Could be better</option><option value="1">★ — Poor</option></select></div>
+        <div class="feedback-field full"><label for="introFeedbackMessage">Your feedback</label><textarea id="introFeedbackMessage" name="message" minlength="10" maxlength="3000" placeholder="What should we improve?" required></textarea></div>
+      </div>
+      <label class="feedback-honeypot" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+      <button class="btn hot big feedback-submit" type="submit">Send feedback ↗</button>
+      <p class="feedback-status" id="introFeedbackStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="fm">
+    <div><a href="#home" aria-label="SPYRIX home" id="footLogo"><img src="/assets/branding/spyrix-master-lockup.png" alt="SPYRIX" /></a><p>Manage customers, create professional invoices, track payments and expenses, and review how your business is doing.</p></div>
+    <div><h4>Explore</h4><a href="#home">Home</a><a href="#toolkit">Features</a><a href="#how-it-works">How it works</a><a href="#faq">FAQ</a></div>
+    <div><h4>Tools</h4><a href="#toolkit">Customers</a><a href="#toolkit">Payments</a><a href="#toolkit">Products &amp; inventory</a></div>
+    <div><h4>Start</h4><a href="#about">About</a><a href="#feedback">Feedback</a><a href="#" id="footerLogin">Log in</a><a href="#" data-enter>Open workspace ↗</a></div>
+  </div>
+  <div class="fb2"><span>© <span id="yearNow"></span> SPYRIX INVOICE</span><b>Create · Track · Grow</b></div>
+</footer>
+
+<script>
+
+// Public feedback form; the backend emails submissions to the SPYRIX team.
+const feedbackForm=document.getElementById("introFeedbackForm");
+if(feedbackForm){
+  feedbackForm.addEventListener("submit",async event=>{
+    event.preventDefault();
+    const submit=feedbackForm.querySelector("button[type=submit]");
+    const status=document.getElementById("introFeedbackStatus");
+    const data=new FormData(feedbackForm);
+    const payload={name:String(data.get("name")||"").trim(),email:String(data.get("email")||"").trim(),message:String(data.get("message")||"").trim(),rating:data.get("rating")?Number(data.get("rating")):null,source:"intro",website:String(data.get("website")||"")};
+    if(payload.name.length<2||payload.message.length<10){status.textContent="Please add your name and a little more detail.";status.classList.add("error");return;}
+    submit.disabled=true;submit.textContent="Sending feedback…";status.classList.remove("error");status.textContent="";
+    try{
+      const endpoint=window.SPYRIX_FEEDBACK_ENDPOINT||"/api/v1/feedback";
+      const response=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok)throw new Error(result.message||"We could not send this feedback. Please try again.");
+      status.textContent="Thank you! Your feedback has been sent to the SPYRIX team.";feedbackForm.reset();
+    }catch(error){status.classList.add("error");status.textContent=error.message||"Could not send your feedback. Please try again.";}
+    finally{submit.disabled=false;submit.textContent="Send feedback ↗";}
+  });
+}
+
+// Navigation into the React app
+const loader=document.getElementById("siteLoader");
+function go(d){loader.classList.remove("is-hidden");clearTimeout(window.spyrixIntroLoaderTimer);window.spyrixIntroLoaderTimer=setTimeout(()=>{window.top.location.href=d},2300)}
+document.querySelectorAll("[data-enter]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();go(location.origin+"/#/register")}));
+const login=e=>{e.preventDefault();go(location.origin+"/#/login")};
+document.getElementById("loginLink").addEventListener("click",login);
+document.getElementById("footerLogin").addEventListener("click",login);
+document.querySelectorAll(".brand,#footLogo").forEach(l=>l.addEventListener("click",e=>{e.preventDefault();
+  loader.classList.remove("is-hidden");clearTimeout(window.spyrixIntroLoaderTimer);
+  window.spyrixIntroLoaderTimer=setTimeout(()=>loader.classList.add("is-hidden"),2300);
+  document.getElementById("home").scrollIntoView({behavior:"smooth"})}));
+window.spyrixIntroLoaderTimer=setTimeout(()=>loader.classList.add("is-hidden"),2300);
+document.getElementById("yearNow").textContent=new Date().getFullYear();
+
+// Mobile menu
+const mb=document.getElementById("menuBtn"),nv=document.getElementById("navLinks");
+mb.addEventListener("click",()=>{const o=nv.classList.toggle("open");mb.setAttribute("aria-expanded",o);mb.textContent=o?"×":"☰"});
+
+// Scroll inside the intro document explicitly. This page is hosted in a srcDoc iframe
+// inside the React app; native fragment links can update a fragment without reliably
+// moving the embedded viewport in every browser. Handle navigation, feature CTAs and footer links.
+function scrollToIntroSection(target){
+  if(!target)return;
+  const header=document.querySelector(".top");
+  const offset=(header?.getBoundingClientRect().height||0)+14;
+  const top=Math.max(0,target.getBoundingClientRect().top+window.scrollY-offset);
+  const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  try{window.scrollTo({top,behavior:reduceMotion?"auto":"smooth"});}
+  catch(_){target.scrollIntoView();}
+}
+document.addEventListener("click",event=>{
+  if(event.defaultPrevented)return;
+  const link=event.target.closest?.('a[href^="#"]');
+  if(!link||link.id==="footLogo"||link.classList.contains("brand"))return;
+  const href=link.getAttribute("href");
+  if(!href||href==="#")return;
+  let id;
+  try{id=decodeURIComponent(href.slice(1));}catch(_){id=href.slice(1);}
+  const target=document.getElementById(id);
+  if(!target)return;
+  event.preventDefault();
+  scrollToIntroSection(target);
+  try{history.replaceState(null,"",`#${encodeURIComponent(id)}`);}catch(_){}
+  if(nv.classList.contains("open")){
+    nv.classList.remove("open");
+    mb.setAttribute("aria-expanded","false");
+    mb.textContent="☰";
+  }
+});
+
+// Reveal on scroll + active link
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach((el,i)=>{el.style.transitionDelay=(i%3)*90+"ms";io.observe(el)});
+const links=[...nv.querySelectorAll("a")];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+["home","toolkit","how-it-works","faq","about"].forEach(id=>so.observe(document.getElementById(id)));
+
+// SVG card frames: a ticket-style outline with a notched corner, a folded corner and red corner brackets.
+const NS="http://www.w3.org/2000/svg";
+function build(el){
+  const w=el.offsetWidth,h=el.offsetHeight,n=30,r=14;if(!w||!h)return;
+  const d=`M${r} 0H${w-n}L${w} ${n}V${h-r}Q${w} ${h} ${w-r} ${h}H${r}Q0 ${h} 0 ${h-r}V${r}Q0 0 ${r} 0Z`;
+  const s=el.querySelector("svg.fr")||el.insertBefore(document.createElementNS(NS,"svg"),el.firstChild);
+  s.setAttribute("class","fr");s.setAttribute("viewBox",`0 0 ${w} ${h}`);s.setAttribute("aria-hidden","true");
+  s.innerHTML=`<path d="${d}" fill="${el.classList.contains("red")?"":"#fff"}" class="bd"/>
+  <path class="sd" d="M${w-n} 0L${w} ${n}H${w-n}Z"/>
+  <path class="kn" d="M10 ${h-34}V${h-10}H34"/><path class="kn" d="M${w-34} ${h-10}H${w-10}V${h-34}" opacity=".5"/>`;
+  el.style.clipPath="none";
+}
+const ro=new ResizeObserver(es=>es.forEach(e=>build(e.target)));
+document.querySelectorAll(".frame").forEach(f=>ro.observe(f));
+</script>
+</body>
+</html>

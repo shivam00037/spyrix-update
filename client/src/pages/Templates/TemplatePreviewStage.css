@@ -1,0 +1,14 @@
+.sp-template-preview-stage { position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;overflow:hidden; }
+.sp-template-preview-stage.is-tile { width:100%;aspect-ratio:794/1123;border-radius:8px;background:#f4f6f4; }
+.sp-template-preview-stage.is-fit { width:100%;height:100%;min-height:0;padding:10px; }
+.sp-template-preview-scaled { position:relative;flex:0 0 auto;overflow:hidden;background:#fff;box-shadow:0 10px 35px rgba(0,0,0,.16); }
+.sp-template-preview-document { position:absolute;left:0;top:0;transform-origin:top left;overflow:hidden;background:#fff; }
+.sp-template-default-document { width:794px;height:1123px;overflow:hidden;background:#fff; }
+.sp-template-default-document .xenmark-invoice { width:794px!important;height:1123px!important;min-height:1123px!important;padding:0!important;gap:10px!important;overflow:hidden!important; }
+.sp-template-default-document .xenmark-invoice .xen-masthead { min-height:198px!important; }
+.sp-template-default-document .xenmark-invoice .xen-logo-target { height:180px!important; }
+.sp-template-preview-stage .spyr-template-document { box-shadow:none; }
+.sp-template-preview-stage .sp-template-default-document .xen-upload-chip,
+.sp-template-preview-stage .sp-template-default-document .xen-add-item-editor { display:none!important; }
+
+.template-live-card-paper .sp-template-preview-stage,.template-full-preview-canvas .sp-template-preview-stage { pointer-events:none; }

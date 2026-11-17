@@ -1,0 +1,297 @@
+.spyrix-loader-screen {
+  --spyrix-loader-accent: #39ff14;
+  --spyrix-loader-rgb: 57, 255, 20;
+  --spyrix-macbook-cycle: 7s;
+  position: fixed;
+  inset: 0;
+  z-index: 30000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(var(--spyrix-loader-rgb), .13), transparent 36%),
+    radial-gradient(ellipse at 50% 100%, rgba(var(--spyrix-loader-rgb), .07), transparent 48%),
+    #030704;
+  color: #f2fff0;
+  animation: spyrix-loader-screen-in .18s ease-out both, spyrix-loader-colour-cycle 4s ease-in-out infinite;
+}
+.spyrix-loader-screen::before,
+.spyrix-loader-screen::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border: 1px solid rgba(var(--spyrix-loader-rgb), .11);
+  border-radius: 50%;
+}
+.spyrix-loader-screen::before { width: min(75vw, 620px); aspect-ratio: 1; }
+.spyrix-loader-screen::after { width: min(58vw, 470px); aspect-ratio: 1; border-color: rgba(var(--spyrix-loader-rgb), .08); }
+.spyrix-loader-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+}
+.spyrix-macbook {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 96px;
+  margin: -85px 0 0 -78px;
+  perspective: 620px;
+  transform: scale(2.05);
+  transform-origin: center center;
+}
+.spyrix-macbook-inner {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg);
+  animation: spyrix-macbook-rotate var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-screen {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  height: 96px;
+  border-radius: 7px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 93px;
+  transform: rotateX(0deg);
+  background: linear-gradient(145deg, #1d2b1d, #071007 78%);
+  box-shadow: inset 0 3px 7px rgba(255,255,255,.16), 0 0 22px rgba(var(--spyrix-loader-rgb), .2);
+  animation: spyrix-macbook-lid-screen var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-screen-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  transform: translateZ(2px);
+  background: linear-gradient(135deg, #183018, #081008 78%);
+  box-shadow: inset 0 0 0 1px rgba(var(--spyrix-loader-rgb), .27);
+}
+.spyrix-macbook-camera {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 3px;
+  height: 3px;
+  margin-left: -1.5px;
+  border-radius: 50%;
+  background: #020402;
+  box-shadow: 0 0 3px rgba(var(--spyrix-loader-rgb), .25);
+}
+.spyrix-macbook-display {
+  position: relative;
+  width: 130px;
+  height: 74px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 1px;
+  background: #020602;
+  box-shadow: inset 0 0 8px rgba(var(--spyrix-loader-rgb), .28), 0 0 10px rgba(var(--spyrix-loader-rgb), .15);
+}
+.spyrix-macbook-brand {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #baffac;
+  font: 900 13px/1 Arial, Helvetica, sans-serif;
+  letter-spacing: 3px;
+  text-shadow: 0 0 5px var(--spyrix-loader-accent), 0 0 13px rgba(var(--spyrix-loader-rgb), .8);
+}
+.spyrix-macbook-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-135deg, transparent 0%, rgba(255,255,255,.12) 47%, transparent 49%);
+  background-size: 300px 200px;
+  background-position: -20px 0;
+  animation: spyrix-macbook-screen-shade var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-lid-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  transform: rotateY(180deg) translateZ(.1px);
+  color: var(--spyrix-loader-accent);
+  font: 900 12px/1 Arial, sans-serif;
+  letter-spacing: -1px;
+  text-shadow: 0 0 5px var(--spyrix-loader-accent), 0 0 12px var(--spyrix-loader-accent);
+}
+.spyrix-macbook-body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  height: 96px;
+  border-radius: 7px;
+  transform-style: preserve-3d;
+  transform-origin: 50% bottom;
+  transform: rotateX(-90deg);
+  background: linear-gradient(145deg, #1b2b1a, #090e09);
+  box-shadow: 0 0 18px rgba(var(--spyrix-loader-rgb), .12);
+  animation: spyrix-macbook-lid-body var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-body-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  transform: translateZ(-2px);
+  background: linear-gradient(145deg, #1b3219, #0a100a);
+  box-shadow: inset 0 0 0 1px rgba(var(--spyrix-loader-rgb), .23);
+  animation: spyrix-macbook-keyboard-area var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-touchpad {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 31px;
+  margin: -44px 0 0 -18px;
+  border: 1px solid rgba(var(--spyrix-loader-rgb), .3);
+  border-radius: 4px;
+  background: #102010;
+  box-shadow: inset 0 0 3px #020502, 0 0 5px rgba(var(--spyrix-loader-rgb), .2);
+}
+.spyrix-macbook-keyboard {
+  position: absolute;
+  left: 7px;
+  top: 41px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 130px;
+  height: 45px;
+  padding-left: 2px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #102010;
+  box-shadow: inset 0 0 3px #020502, 0 0 5px rgba(var(--spyrix-loader-rgb), .16);
+}
+.spyrix-macbook-key {
+  display: block;
+  flex: 0 0 6px;
+  height: 6px;
+  margin: 1px;
+  border-radius: 2px;
+  transform: translateZ(-2px);
+  background: #254525;
+  box-shadow: 0 -2px 0 #030703, 0 0 2px rgba(var(--spyrix-loader-rgb), .35);
+  animation: spyrix-macbook-keys var(--spyrix-macbook-cycle) ease-in-out infinite;
+}
+.spyrix-macbook-key.space { flex-basis: 45px; }
+.spyrix-macbook-key.function { height: 3px; }
+.spyrix-macbook-pad {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--spyrix-loader-accent);
+  box-shadow: 0 0 6px rgba(var(--spyrix-loader-rgb), .9);
+}
+.spyrix-macbook-pad.one { left: 20px; top: 20px; }
+.spyrix-macbook-pad.two { right: 20px; top: 20px; }
+.spyrix-macbook-pad.three { right: 20px; bottom: 20px; }
+.spyrix-macbook-pad.four { left: 20px; bottom: 20px; }
+.spyrix-macbook-shadow {
+  position: absolute;
+  left: 40px;
+  top: 160px;
+  width: 60px;
+  height: 0;
+  transform: rotateX(80deg);
+  box-shadow: 0 0 60px 40px rgba(var(--spyrix-loader-rgb), .13);
+  animation: spyrix-macbook-shadow var(--spyrix-macbook-cycle) ease infinite;
+}
+@keyframes spyrix-loader-screen-in { from { opacity: 0; } to { opacity: 1; } }
+/* The loader itself stays the same; its neon-green glow smoothly shifts to red and back. */
+@keyframes spyrix-loader-colour-cycle {
+  0%, 100% { filter: hue-rotate(0deg) saturate(1.08); }
+  50% { filter: hue-rotate(240deg) saturate(1.16); }
+}
+@keyframes spyrix-macbook-rotate {
+  0% { transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg); }
+  5% { transform: rotateX(-20deg) rotateY(-20deg) rotateZ(0deg); }
+  20% { transform: rotateX(30deg) rotateY(200deg) rotateZ(0deg); }
+  25% { transform: rotateX(-60deg) rotateY(150deg) rotateZ(0deg); }
+  60% { transform: rotateX(-20deg) rotateY(130deg) rotateZ(0deg); }
+  65% { transform: rotateX(-20deg) rotateY(120deg) rotateZ(0deg); }
+  80% { transform: rotateX(-20deg) rotateY(375deg) rotateZ(0deg); }
+  85% { transform: rotateX(-20deg) rotateY(357deg) rotateZ(0deg); }
+  87%,100% { transform: rotateX(-20deg) rotateY(360deg) rotateZ(0deg); }
+}
+@keyframes spyrix-macbook-lid-screen {
+  0%,100% { transform: rotateX(0deg); background-position: left bottom; }
+  5% { transform: rotateX(50deg); background-position: left bottom; }
+  20% { transform: rotateX(-90deg); background-position: -150px top; }
+  25% { transform: rotateX(15deg); background-position: left bottom; }
+  30% { transform: rotateX(-5deg); background-position: right top; }
+  38% { transform: rotateX(5deg); background-position: right top; }
+  48%,90% { transform: rotateX(0deg); background-position: right top; }
+}
+@keyframes spyrix-macbook-lid-body { 0%,50%,100% { transform: rotateX(-90deg); } }
+@keyframes spyrix-macbook-keyboard-area { 0%,100% { background-color: #1b3219; } 50% { background-color: #182719; } }
+@keyframes spyrix-macbook-screen-shade {
+  0% { background-position: -20px 0; }
+  5% { background-position: -40px 0; }
+  20% { background-position: 200px 0; }
+  50% { background-position: -200px 0; }
+  80% { background-position: 0 0; }
+  85% { background-position: -30px 0; }
+  90%,100% { background-position: -20px 0; }
+}
+@keyframes spyrix-macbook-keys {
+  0%,5%,85%,87%,100% { box-shadow: 0 -2px 0 #030703, 0 0 2px rgba(var(--spyrix-loader-rgb), .35); }
+  20%,25%,60% { box-shadow: -1px 1px 0 #030703, 0 0 2px rgba(var(--spyrix-loader-rgb), .35); }
+  80% { box-shadow: 0 -2px 0 #030703, 0 0 2px rgba(var(--spyrix-loader-rgb), .35); }
+}
+@keyframes spyrix-macbook-shadow {
+  0%,5% { transform: rotateX(80deg) rotateY(0deg); box-shadow: 0 0 60px 40px rgba(var(--spyrix-loader-rgb), .13); }
+  20% { transform: rotateX(30deg) rotateY(-20deg) rotateZ(-20deg); box-shadow: 0 0 50px 30px rgba(var(--spyrix-loader-rgb), .13); }
+  25% { transform: rotateX(80deg) rotateY(-20deg) rotateZ(50deg); box-shadow: 0 0 35px 15px rgba(var(--spyrix-loader-rgb), .08); }
+  60% { transform: rotateX(80deg) rotateY(0deg) rotateZ(-50deg) translateX(30px); }
+  100% { box-shadow: 0 0 60px 40px rgba(var(--spyrix-loader-rgb), .13); }
+}
+@media (max-width: 600px) {
+  .spyrix-loader-stage { min-height: 100svh; }
+  .spyrix-macbook { transform: scale(1.38); margin: -70px 0 0 -78px; }
+  .spyrix-loader-screen::before { width: 92vw; }
+  .spyrix-loader-screen::after { width: 72vw; }
+}
+@media (max-width: 360px) {
+  .spyrix-macbook { transform: scale(1.22); margin: -60px 0 0 -78px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the requested brand-colour cycle; skip only optional decorative movement below. */
+  .spyrix-loader-screen { animation: spyrix-loader-screen-in .18s ease-out both, spyrix-loader-colour-cycle 4s ease-in-out infinite !important; }
+  .spyrix-macbook-inner,
+  .spyrix-macbook-screen,
+  .spyrix-macbook-body,
+  .spyrix-macbook-body-face,
+  .spyrix-macbook-shade,
+  .spyrix-macbook-key,
+  .spyrix-macbook-shadow { animation-duration: 7s; }
+}
+
+
+/* Keep the reference MacBook animation alive on phones and reduced-motion devices.
+   The loader is a deliberate, short brand transition, so its 3D sequence remains visible. */
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  .spyrix-loader-screen .spyrix-macbook-inner { animation: spyrix-macbook-rotate 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-screen { animation: spyrix-macbook-lid-screen 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-body { animation: spyrix-macbook-lid-body 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-body-face { animation: spyrix-macbook-keyboard-area 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-shade { animation: spyrix-macbook-screen-shade 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-key { animation: spyrix-macbook-keys 7s ease-in-out infinite !important; }
+  .spyrix-loader-screen .spyrix-macbook-shadow { animation: spyrix-macbook-shadow 7s ease infinite !important; }
+}

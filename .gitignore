@@ -1,0 +1,20 @@
+# Node dependencies and generated output
+node_modules/
+**/node_modules/
+client/dist/
+server/dist/
+coverage/
+
+# Private environment files (example files are safe to commit)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local/editor noise
+.DS_Store
+*.log
+.vscode/*
+!.vscode/extensions.json

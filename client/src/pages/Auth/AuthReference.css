@@ -1,0 +1,136 @@
+
+  .auth-reference, .auth-reference *{box-sizing:border-box;margin:0;padding:0}
+  .auth-reference{--red:#ff1f3d;--red2:#ff5c72;--ink:#1c0b0f;--mute:#a88a90;--err:#ffb3bd}
+  .auth-reference, .auth-reference{min-height:100%}
+  .auth-reference{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;background:#0a0003;color:#fff;font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden}
+
+  /* whole page drifts red -> neon green -> red */
+  .auth-reference.theme{position:relative;min-height:100vh;min-height:100svh;overflow-x:hidden;overflow-y:auto;animation:neon 8s ease-in-out infinite}
+  @keyframes neon{
+    0%,10%{filter:hue-rotate(0deg) saturate(1) brightness(1)}
+    35%,60%{filter:hue-rotate(118deg) saturate(1.5) brightness(1.7)}
+    85%,100%{filter:hue-rotate(0deg) saturate(1) brightness(1)}}
+
+  /* background city */
+  .auth-reference #scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .auth-reference .vig{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,.1) 30%,rgba(0,0,0,.75))}
+  .auth-reference #far, .auth-reference #near{animation:sway 40s ease-in-out infinite alternate}
+  .auth-reference #near{animation-duration:28s;animation-direction:alternate-reverse}
+  @keyframes sway{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
+
+  /* layout */
+  .auth-reference .page{position:relative;z-index:5;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 16px;perspective:1200px}
+  .auth-reference .logo{display:block;width:min(520px,88vw);height:auto;filter:drop-shadow(0 0 18px rgba(255,31,61,.45))}
+  .auth-reference .stage{position:relative;width:380px;max-width:100%}
+  .auth-reference .stage::before{content:"";position:absolute;inset:-40px;background:radial-gradient(closest-side,rgba(255,31,61,.28),transparent);z-index:-1}
+  .auth-reference #flip{position:absolute;opacity:0;pointer-events:none}
+  .auth-reference .card{position:relative;display:grid;width:100%;transform-style:preserve-3d;transition:transform .9s ease}
+  .auth-reference #flip:checked ~ .card{transform:rotateY(-180deg)}
+
+  .auth-reference .face{grid-area:1/1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:36px 34px 30px;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;isolation:isolate;
+    background:linear-gradient(135deg,var(--red),#5a0a16 55%,var(--red));
+    clip-path:polygon(0 28px,28px 0,100% 0,100% calc(100% - 28px),calc(100% - 28px) 100%,0 100%)}
+  .auth-reference .face::before{content:"";position:absolute;inset:2px;z-index:-1;background:linear-gradient(160deg,#1e090e,#0a0305);
+    clip-path:polygon(0 27px,27px 0,100% 0,100% calc(100% - 27px),calc(100% - 27px) 100%,0 100%)}
+  .auth-reference .back{transform:rotateY(-180deg);gap:11px}
+  .auth-reference .face[inert]{visibility:hidden}
+
+  .auth-reference h2{font-size:26px;font-weight:600;letter-spacing:.01em;padding-bottom:4px}
+  .auth-reference .sub{font-size:13px;color:var(--mute);margin-top:-8px}
+
+  .auth-reference .field{position:relative}
+  .auth-reference .input{width:100%;min-height:46px;padding:0 14px;font:inherit;font-size:14px;color:#fff;background:var(--ink);
+    border:2px solid var(--ink);border-radius:6px;outline:none;transition:.25s;box-shadow:5px 5px 10px #000,1px 1px 10px rgba(255,31,61,.3)}
+  .auth-reference .input::placeholder{color:var(--mute)}
+  .auth-reference .input:focus{border-color:var(--red2);box-shadow:5px 5px 10px #000,inset 2px 2px 8px #000,0 0 0 3px rgba(255,31,61,.25)}
+  .auth-reference .pw .input{padding-right:58px}
+  .auth-reference .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--mute);font:inherit;font-size:12px;padding:8px;cursor:pointer;border-radius:4px}
+  .auth-reference .eye:hover{color:#fff}
+  .auth-reference .eye:focus-visible, .auth-reference .link:focus-visible, .auth-reference .btn:focus-visible, .auth-reference #flip:focus-visible ~ .card{outline:2px solid #fff;outline-offset:2px}
+
+  .auth-reference .row{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;align-items:center;font-size:13px;color:#e7d3d7}
+  .auth-reference .row label{display:flex;align-items:center;gap:8px;cursor:pointer}
+  .auth-reference .row input{accent-color:var(--red);width:15px;height:15px}
+  .auth-reference .link{background:none;border:0;font:inherit;color:var(--red2);cursor:pointer;text-decoration:underline;padding:0}
+  .auth-reference .link:hover{color:#fff}
+
+  .auth-reference .btn{min-height:46px;margin-top:2px;font:inherit;font-size:15px;font-weight:700;color:#fff;background:var(--red);border:2px solid var(--red);border-radius:6px;
+    cursor:pointer;transition:.25s;box-shadow:5px 5px 10px #000,1px 1px 16px rgba(255,31,61,.6)}
+  .auth-reference .btn:hover{background:#e0102e;border-color:var(--red2);transform:translateY(-1px)}
+  .auth-reference .btn:disabled{opacity:.6;cursor:wait;transform:none}
+
+  .auth-reference .msg{min-height:18px;font-size:13px;text-align:center;color:var(--err)}
+  .auth-reference .msg.ok{color:#fff}
+  .auth-reference .switch{font-size:13px;text-align:center;color:#e7d3d7}
+  .auth-reference .switch label{font-weight:700;color:var(--red2);text-decoration:underline;cursor:pointer}
+  .auth-reference .switch label:hover{color:#fff}
+
+  @media(max-width:480px){
+    .auth-reference .page{padding:14px 12px;gap:2px}
+    .auth-reference .stage::before{inset:-20px}
+    .auth-reference .face{padding:26px 22px 22px;gap:11px}
+    .auth-reference .back{gap:9px}
+    .auth-reference h2{font-size:22px;padding-bottom:0}
+    .auth-reference .input{font-size:16px;min-height:44px}   /* 16px stops iOS zooming in on focus */
+    .auth-reference .btn{min-height:44px}
+    .auth-reference .row{font-size:12.5px}
+    .auth-reference .msg{min-height:16px}
+  }
+  @media(prefers-reduced-motion:reduce){.auth-reference #far, .auth-reference #near, .auth-reference.theme{animation:none}.auth-reference .card{transition:none}}
+
+/* SPYRIX app integration: real form feedback and preserved existing provider features. */
+.auth-reference .msg.error{color:#ffb3bd!important;text-shadow:0 0 8px rgba(255,31,61,.25)}
+.auth-reference .msg.ok{color:#caffc3!important}
+.auth-reference .auth-extras{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;width:min(380px,100%);margin-top:6px}
+.auth-reference .auth-provider-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;width:100%}
+.auth-reference .auth-provider-row>div{min-width:0}
+.auth-reference .auth-extra-button{min-height:36px;padding:8px 12px;border:1px solid rgba(255,255,255,.18);border-radius:6px;background:rgba(9,2,4,.75);color:#f6e9eb;font:600 12px/1.2 "Segoe UI",system-ui,sans-serif;cursor:pointer;box-shadow:0 5px 12px rgba(0,0,0,.3)}
+.auth-reference .auth-extra-button:hover{border-color:var(--red2);color:#fff}
+.auth-reference .auth-extra-note{max-width:380px;color:rgba(255,225,230,.72);font-size:10px;line-height:1.5;text-align:center}
+.auth-reference .auth-google-host{display:flex;justify-content:center;max-width:100%;min-height:36px}
+.auth-reference .auth-google-host iframe{max-width:100%!important}
+.auth-reference .auth-loader-safe{position:relative}
+@media(max-height:720px){.auth-reference .page{justify-content:flex-start;padding-top:18px;padding-bottom:20px}.auth-reference .logo{width:min(400px,78vw)}.auth-reference .face{padding-top:24px;padding-bottom:22px;gap:10px}.auth-reference .auth-extras{margin-top:4px}}
+@media(max-width:480px){.auth-reference .auth-extras{margin-top:3px}.auth-reference .auth-provider-row{gap:6px}.auth-reference .auth-extra-button{font-size:11px;padding:8px 10px}}
+
+
+/* Mobile animation repair: global workspace styles disable all motion under 760px.
+   Restore only the auth scene/card motion here, without touching the shared loader. */
+@keyframes auth-neon-cycle {
+  0%, 10%, 88%, 100% { filter: hue-rotate(0deg) saturate(1) brightness(1); }
+  38%, 62% { filter: hue-rotate(118deg) saturate(1.42) brightness(1.18); }
+}
+@keyframes auth-skyline-drift {
+  from { transform: translateX(-18px); }
+  to { transform: translateX(18px); }
+}
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  .auth-reference.theme {
+    -webkit-animation: auth-neon-cycle 8s ease-in-out infinite !important;
+    animation: auth-neon-cycle 8s ease-in-out infinite !important;
+  }
+  .auth-reference #far {
+    -webkit-animation: auth-skyline-drift 30s ease-in-out infinite alternate !important;
+    animation: auth-skyline-drift 30s ease-in-out infinite alternate !important;
+  }
+  .auth-reference #near {
+    -webkit-animation: auth-skyline-drift 22s ease-in-out infinite alternate-reverse !important;
+    animation: auth-skyline-drift 22s ease-in-out infinite alternate-reverse !important;
+  }
+  .auth-reference .card {
+    -webkit-transition: transform .82s cubic-bezier(.2,.8,.2,1) !important;
+    transition: transform .82s cubic-bezier(.2,.8,.2,1) !important;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  .auth-reference #flip:checked ~ .card {
+    -webkit-transform: rotateY(-180deg) !important;
+    transform: rotateY(-180deg) !important;
+  }
+}
+@media (max-width: 480px) {
+  .auth-reference .stage { width: min(340px, calc(100vw - 40px)); }
+  .auth-reference .page { padding-left: 10px; padding-right: 10px; }
+  .auth-reference .face { padding-left: 19px; padding-right: 19px; }
+}

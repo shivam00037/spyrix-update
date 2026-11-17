@@ -1,0 +1,184 @@
+/* Theme picker swatches for both newly added palettes. */
+.app-shell[data-theme] .theme-dot.neon-green {
+  background: linear-gradient(135deg, #39ff14 0 50%, #fff 50% 100%) !important;
+  border: 1px solid #91d989 !important;
+}
+
+/* Personalised greeting toast: visible for five seconds, then removed automatically. */
+.db-welcome-toast {
+  position: fixed;
+  z-index: 70;
+  top: 98px;
+  right: 25px;
+  width: min(390px, calc(100vw - 30px));
+  min-height: 76px;
+  padding: 13px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--accent-border);
+  border-radius: 15px;
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgba(20, 20, 30, .16), 0 0 0 4px var(--accent-shadow);
+  animation: spyrix-welcome-in .42s cubic-bezier(.2,.75,.2,1) both;
+}
+.db-welcome-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--accent-contrast);
+  background: var(--accent);
+}
+.db-welcome-copy { min-width: 0; flex: 1; display: grid; gap: 4px; }
+.db-welcome-copy strong { color: var(--text); font-size: 13px; font-weight: 900; }
+.db-welcome-copy small { color: var(--muted); font-size: 10px; line-height: 1.45; }
+.db-welcome-toast > button {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--accent-pale);
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+.db-welcome-toast > button:hover { color: var(--accent-contrast); background: var(--accent); }
+@keyframes spyrix-welcome-in { from { opacity: 0; transform: translate3d(0,-12px,0) scale(.98); } to { opacity: 1; transform: translate3d(0,0,0) scale(1); } }
+@media(max-width:760px) {
+  .db-welcome-toast { top: 78px; right: 12px; width: calc(100vw - 24px); }
+}
+@media(prefers-reduced-motion:reduce) { .db-welcome-toast { animation: none !important; } }
+
+/* Branded loading screen: the complete supplied SPYRIX lockup is animated, not a small icon. */
+.app-loading {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  gap: 15px !important;
+  color: #57545a !important;
+  background: radial-gradient(ellipse at 50% 44%, #fff1f3 0%, #fff 42%, #f7f7f9 100%) !important;
+}
+.app-loading-aura {
+  position: absolute;
+  z-index: -1;
+  width: min(78vw, 620px);
+  height: 210px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(220, 38, 59, .15), rgba(220, 38, 59, .035) 48%, transparent 72%);
+  filter: blur(13px);
+  animation: spyrix-loader-aura 2.8s ease-in-out infinite alternate;
+}
+.app-loading .app-loading-brand {
+  position: relative;
+  width: min(84vw, 500px) !important;
+  height: clamp(90px, 18vw, 148px) !important;
+  margin: 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform-origin: center;
+  animation: spyrix-loader-float 2.1s ease-in-out infinite;
+  filter: drop-shadow(0 12px 22px rgba(110, 18, 34, .12));
+}
+.app-loading .app-loading-brand .spyrix-brand-logo {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  flex: 1 1 auto !important;
+  object-fit: contain !important;
+}
+.app-loading-progress {
+  width: min(220px, 45vw);
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e8e5e8;
+}
+.app-loading-progress span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a9152c, #ef3348, #ff8c99);
+  box-shadow: 0 0 12px rgba(220, 38, 59, .28);
+  animation: spyrix-loader-progress 1.45s ease-in-out infinite;
+}
+.app-loading-caption { color: #7a747a; font-size: 9px; font-weight: 900; letter-spacing: 2.8px; }
+@keyframes spyrix-loader-float {
+  0%, 100% { transform: translateY(0) scale(.985); }
+  50% { transform: translateY(-8px) scale(1.015); }
+}
+@keyframes spyrix-loader-aura { from { opacity: .55; transform: scale(.92); } to { opacity: 1; transform: scale(1.08); } }
+@keyframes spyrix-loader-progress { 0% { transform: translateX(-115%); } 100% { transform: translateX(260%); } }
+@media(max-width:600px) {
+  .app-loading .app-loading-brand { width: 86vw !important; height: 104px !important; }
+  .app-loading-caption { font-size: 8px; letter-spacing: 2px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .app-loading .app-loading-brand, .app-loading-aura, .app-loading-progress span { animation: none !important; }
+  .app-loading-progress span { width: 100%; transform: none; }
+}
+
+/* Recolour the red portions of the SPYRIX lockup when the Neon Green workspace is active. */
+.app-shell[data-theme="neon-green"] .sidebar-brand-logo .spyrix-brand-logo,
+.app-shell[data-theme="neon-green"] .db-hero-brand .spyrix-brand-logo {
+  filter: hue-rotate(82deg) saturate(1.18) brightness(1.06) drop-shadow(0 0 10px rgba(57,255,20,.16)) !important;
+}
+
+/* Keep the default Neon Green authentication screens dark after global theme tokens load. */
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) {
+  --auth-neon: #39ff14 !important;
+  --auth-neon-rgb: 57,255,20 !important;
+  color: #efffee !important;
+  background:
+    radial-gradient(ellipse at 8% 14%, rgba(57,255,20,.12), transparent 34%),
+    radial-gradient(ellipse at 80% 90%, rgba(57,255,20,.075), transparent 38%),
+    #030704 !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-panel {
+  color: #f1fff0 !important;
+  background: linear-gradient(148deg, rgba(15,26,16,.98), rgba(6,11,7,.99) 66%) !important;
+  border-color: rgba(57,255,20,.23) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.56), 0 0 34px rgba(57,255,20,.055), inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-panel :is(h1,label,.auth-brand-growth strong) { color: #f4fff2 !important; }
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-panel :is(.auth-subtitle,.auth-switch,.auth-footnote,.auth-brand-growth span) { color: #a9b9a9 !important; }
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) :is(.auth-kicker,.auth-switch button) { color: #39ff14 !important; }
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-input {
+  color: #f0fff0 !important;
+  background: rgba(3,9,4,.84) !important;
+  border-color: rgba(145,188,143,.22) !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-input :is(input,svg) { color: #f2fff0 !important; background: transparent !important; }
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-submit {
+  color: #061006 !important;
+  background: linear-gradient(110deg,#8dff73,#39ff14 52%,#20d90c) !important;
+  border-color: #39ff14 !important;
+  box-shadow: 0 12px 28px rgba(57,255,20,.17), inset 0 1px 0 rgba(255,255,255,.38) !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) :is(.auth-back-link,.auth-google-fallback) {
+  color: #caffc3 !important;
+  background: rgba(57,255,20,.07) !important;
+  border-color: rgba(57,255,20,.25) !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-theme-toggle {
+  color: #eaffea !important;
+  background: #0b140c !important;
+  border-color: rgba(57,255,20,.25) !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .auth-art {
+  border-color: rgba(57,255,20,.26) !important;
+  background:
+    radial-gradient(ellipse at 70% 25%, rgba(57,255,20,.16), transparent 40%),
+    linear-gradient(145deg, rgba(5,14,6,.48), rgba(2,6,3,.94)),
+    url('/assets/hero-art.png') center/cover no-repeat !important;
+}
+.auth-page[data-theme="neon-green"]:not([data-theme="mono"]) .spyrix-brand-logo { filter: hue-rotate(82deg) saturate(1.18) brightness(1.06) !important; }

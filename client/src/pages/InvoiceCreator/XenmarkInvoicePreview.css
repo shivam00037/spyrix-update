@@ -1,0 +1,416 @@
+.xenmark-invoice{--xen-accent:var(--ic-accent,#85172d);--xen-deep:#570a18;--xen-ink:#11151b;--xen-line:#c9c9c9;width:100%;min-width:0;display:flex;flex-direction:column;gap:14px;color:var(--ic-text-color,#11151b);background:#fff;font-family:var(--ic-font,Arial,Helvetica,sans-serif);font-size:13px;line-height:1.34;}
+.xenmark-invoice *{box-sizing:border-box;min-width:0;}
+.xen-inline-edit{display:inline-block;min-width:6px;max-width:100%;border-radius:2px;outline:1px dashed transparent;outline-offset:2px;cursor:text;white-space:pre-line;overflow-wrap:anywhere;transition:outline-color .12s,background .12s;touch-action:manipulation;}
+.xen-inline-edit:hover,.xen-inline-edit:focus{outline-color:color-mix(in srgb,var(--xen-accent) 62%,transparent);background:color-mix(in srgb,var(--xen-accent) 6%,white);}
+.xen-inline-edit:empty:before{content:attr(data-placeholder);color:#777;font-weight:500;opacity:.92;}
+.xen-masthead{position:relative;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1fr);align-items:stretch;gap:22px;min-height:246px;padding:5px 0 10px;}
+.xen-logo-side{display:flex;align-items:center;justify-content:center;padding:0 21px 0 4px;border-right:3px solid #17191d;}
+.xen-upload-target{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;border:1px dashed #d2d2d2;border-radius:5px;background:#fff;cursor:pointer;isolation:isolate;touch-action:manipulation;}
+.xen-upload-target input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.xen-upload-target>img{display:block;width:100%;height:100%;max-height:100%;object-fit:contain;}
+.xen-upload-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;color:var(--xen-accent);text-align:center;}
+.xen-upload-empty b{font-size:10px;font-weight:800;}
+.xen-upload-empty small{font-size:9px;color:#777;}
+.xen-upload-chip{position:absolute;right:5px;bottom:5px;display:inline-flex;align-items:center;gap:4px;padding:4px 6px;border-radius:4px;background:#11151b;color:white;font-size:9px;font-weight:800;opacity:0;transition:opacity .15s;}
+.xen-upload-target:hover .xen-upload-chip,.xen-upload-target:focus-within .xen-upload-chip{opacity:1;}
+.xen-logo-target{width:min(100%,390px);height:230px;border-color:transparent;border-radius:0;background:transparent;}
+.xen-logo-target .xen-upload-empty svg{width:37px;height:37px;}
+.xen-logo-target .xen-upload-empty b{font-size:11px;}
+.xen-business-head{display:flex;flex-direction:column;justify-content:center;padding:3px 8px 0 0;gap:10px;}
+.xen-manufacturer-title{margin:0;color:#11151b;font-size:clamp(13px,1.65vw,18px);font-weight:900;letter-spacing:1.25px;line-height:1.22;text-transform:uppercase;}
+.xen-service-line{margin:0;color:#151515;font-size:clamp(10px,1.18vw,14px);font-weight:850;letter-spacing:.45px;line-height:1.42;text-transform:uppercase;}
+.xen-service-line-secondary{margin-top:-5px;}
+.xen-service-icons{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:stretch;margin-top:2px;border-top:1px solid #d4d4d4;}
+.xen-service-icon{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:11px 3px 3px;border-right:1px solid #b0b0b0;color:var(--xen-accent);text-align:center;}
+.xen-service-icon:last-child{border-right:0;}
+.xen-service-icon svg{flex:0 0 auto;}
+.xen-service-label{color:#202020;font-size:clamp(7px,.8vw,9px);font-weight:850;line-height:1.18;text-align:center;text-transform:uppercase;}
+.xen-invoice-band{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(205px,.55fr);align-items:center;gap:14px;min-height:78px;padding:12px 24px;background:linear-gradient(105deg,var(--xen-accent) 0%,#94172c 72%,#650c1d 100%);border-radius:6px;color:#fff;overflow:hidden;}
+.xen-invoice-band:after{content:"";position:absolute;z-index:-1;top:0;right:25%;height:100%;width:82px;background:var(--xen-ink);clip-path:polygon(59% 0,100% 0,41% 100%,0 100%);}
+.xen-invoice-heading{margin:0;color:#fff;font-size:clamp(40px,5.5vw,60px);font-weight:900;line-height:1;letter-spacing:1px;text-transform:uppercase;}
+.xen-invoice-band .xen-inline-edit:hover,.xen-invoice-band .xen-inline-edit:focus{outline-color:#fff;background:#ffffff15;}
+.xen-invoice-band .xen-inline-edit:empty:before{color:#f4e6e9;}
+.xen-invoice-quick-meta{display:grid;gap:3px;position:relative;z-index:1;}
+.xen-invoice-quick-meta>div{display:grid;grid-template-columns:74px 8px minmax(0,1fr);gap:5px;align-items:center;font-size:12px;}
+.xen-invoice-quick-meta span{color:#fff;font-weight:800;}.xen-invoice-quick-meta .xen-meta-colon{font-weight:600;text-align:center;}
+.xen-invoice-quick-meta b{color:#fff;font-weight:800;}
+.xen-party-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;}
+.xen-party-card{min-height:240px;overflow:hidden;border:1px solid #8b4d58;border-radius:6px;background:#fff;}
+.xen-party-card h3{display:flex;align-items:center;gap:13px;width:max-content;max-width:97%;min-width:42%;margin:0;padding:11px 18px;color:#fff;background:var(--xen-accent);font-size:14px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;clip-path:polygon(0 0,100% 0,86% 100%,0 100%);}
+.xen-party-bullet{font-size:12px;line-height:1;}.xen-party-heading-icon,.xen-party-grid-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 20px;}
+.xen-party-grid-icon{display:inline-flex;align-items:center;justify-content:center;}
+.xen-party-details{display:grid;gap:8px;padding:16px 17px 17px;}
+.xen-party-details>div{display:grid;grid-template-columns:minmax(95px,.47fr) 8px minmax(0,1fr);align-items:start;gap:7px;font-size:13px;line-height:1.48;}
+.xen-party-details>div>span:first-child{color:#262626;}
+.xen-party-details>div>b{font-weight:500;}
+.xen-party-details .xen-inline-edit{font-weight:500;}
+.xen-date-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;min-height:69px;padding:8px 4px;border:1px solid #bdb5b7;border-radius:6px;}
+.xen-date-strip>div{display:flex;align-items:center;gap:11px;padding:4px 10px;border-right:1px solid #969696;}
+.xen-date-strip>div:last-child{border-right:0;}
+.xen-meta-symbol{display:flex;align-items:center;justify-content:center;flex:0 0 26px;color:var(--xen-accent);}
+.xen-date-strip>div>span:last-child{display:grid;gap:3px;}
+.xen-date-strip small{color:#222;font-size:12px;}.xen-meta-content{display:grid;gap:3px;min-width:0;flex:1;}.xen-meta-inline{display:flex;align-items:center;gap:7px;min-width:0;color:#333;}.xen-meta-inline>small{font-size:11px;white-space:nowrap;}.xen-meta-edit-line{flex:1;min-width:24px;min-height:17px;border-bottom:1px solid #818181;}
+.xen-date-strip b{font-size:13px;font-weight:900;}
+.xen-table-wrap{width:100%;max-width:100%;overflow:hidden;border:1px solid #c4c4c4;border-radius:7px;}
+.xen-items-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;}
+.xen-items-table th{padding:12px 8px;border-right:1px solid #bca5a9;color:#fff;background:var(--xen-accent);font-size:12px;font-weight:900;text-align:center;vertical-align:middle;}
+.xen-items-table th:first-child{width:9%;}.xen-items-table th:nth-child(2){width:39%;}.xen-items-table th:nth-child(3){width:17%;}.xen-items-table th:nth-child(4){width:16%;}.xen-items-table th:nth-child(5){width:19%;}
+.xen-items-table th:last-child,.xen-items-table td:last-child{border-right:0;}
+.xen-items-table td{padding:11px 9px;border-top:1px solid #d3d3d3;border-right:1px solid #d3d3d3;vertical-align:middle;overflow-wrap:anywhere;}
+.xen-items-table tbody tr:nth-child(even){background:#f4f5f5;}
+.xen-row-num,.xen-centered{text-align:center;}
+.xen-line-name{display:block;font-weight:600;}
+.xen-line-description{display:block;margin-top:3px;color:#676767;font-size:9px;}
+.xen-empty-row{text-align:center;color:#777;padding:22px!important;}
+.xen-payment-total-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.9fr);gap:13px;align-items:stretch;}
+.xen-payment-box,.xen-total-box{overflow:hidden;border:1px solid #bdb5b7;border-radius:7px;background:#fff;}
+.xen-payment-box>h3{width:49%;min-width:190px;max-width:100%;margin:0;padding:8px 28px 8px 17px;background:var(--xen-accent);color:#fff;font-size:17px;font-weight:900;clip-path:polygon(0 0,100% 0,87% 100%,0 100%);}
+.xen-payment-content{display:grid;grid-template-columns:minmax(175px,.75fr) minmax(0,1fr);gap:11px;padding:9px;}
+.xen-qr-card{display:flex;min-width:0;flex-direction:column;align-items:stretch;border:2px solid #292929;border-radius:7px;padding:5px;text-align:center;}
+.xen-qr-brand{display:flex;justify-content:center;align-items:center;gap:6px;padding:5px 3px;color:#603c86;font-size:14px;font-weight:900;}
+.xen-phonepe-mark{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#6e2c91;color:#fff;font-size:15px;font-weight:900;line-height:1;}
+.xen-qr-target{align-self:center;width:100%;max-width:180px;min-height:0;aspect-ratio:1 / 1;border:0;border-radius:3px;}
+.xen-qr-target img{padding:5px;object-fit:contain;}
+.xen-qr-target .xen-upload-empty{gap:5px;padding:8px;}
+.xen-qr-target .xen-upload-empty svg{width:28px;height:28px;}
+.xen-qr-target .xen-upload-empty b{font-size:10px;}
+.xen-qr-target .xen-upload-empty small{font-size:8px;}
+.xen-qr-caption{display:grid;gap:2px;padding:4px 0 1px;font-size:10px;}
+.xen-qr-caption b{font-weight:900;}
+.xen-qr-caption small{font-size:8px;color:#4b4b4b;}
+.xen-payment-instructions{display:flex;min-width:0;flex-direction:column;gap:8px;font-size:11px;line-height:1.53;}
+.xen-payment-instructions>b{padding:8px 6px;border-radius:5px;color:#fff;background:var(--xen-accent);font-size:11px;text-align:center;}
+.xen-payment-instructions>p{margin:0;line-height:1.55;white-space:pre-line;}
+.xen-payment-status{padding:6px 7px;background:#f4e5e8;color:var(--xen-accent);font-size:9px;font-weight:900;}
+.xen-payment-numbers{display:grid;gap:5px;font-size:10px;}
+.xen-payment-numbers>span{display:flex;align-items:start;justify-content:space-between;gap:8px;}
+.xen-payment-numbers b{white-space:nowrap;}
+.xen-total-box{display:flex;flex-direction:column;}
+.xen-total-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;border-bottom:1px solid #d5d5d5;font-size:13px;}
+.xen-total-line>b{white-space:nowrap;font-weight:800;}
+.xen-grand-total{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;background:var(--xen-accent);color:#fff;font-size:clamp(16px,1.8vw,21px);font-weight:900;}
+.xen-grand-total .xen-inline-edit:hover,.xen-grand-total .xen-inline-edit:focus{outline-color:#fff;background:#ffffff15;}
+.xen-grand-total>b{white-space:nowrap;}
+.xen-thank-you{display:flex;flex:1;min-height:96px;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px;color:var(--xen-accent);text-align:center;}
+.xen-thank-you strong{font-family:"Brush Script MT","Segoe Script","Comic Sans MS",cursive;font-size:clamp(34px,4vw,47px);font-weight:500;line-height:1.05;transform:rotate(-7deg);}
+.xen-thank-you small{color:#1d1d1d;font-size:9px;font-weight:900;letter-spacing:.4px;}
+.xen-signature-target{width:104px;height:24px;flex:0 0 24px;border-color:transparent;border-radius:2px;background:transparent;}
+.xen-signature-target .xen-upload-empty{flex-direction:row;gap:4px;padding:2px;color:#555;}
+.xen-signature-target .xen-upload-empty svg{width:12px;height:12px;}
+.xen-signature-target .xen-upload-empty b{font-size:7px;font-weight:700;}
+.xen-signature-target .xen-upload-empty small{display:none;}
+.xen-signature-target>img{max-width:100%;object-fit:contain;}
+.xen-service-ribbon{display:grid;grid-template-columns:minmax(0,.83fr) minmax(0,2fr);min-height:91px;overflow:hidden;border:1px solid #bdb5b7;border-radius:7px;background:#fff;}
+.xen-service-ribbon-title{display:flex;align-items:center;padding:12px 24px;background:var(--xen-ink);color:#fff;position:relative;isolation:isolate;}
+.xen-service-ribbon-title:after{content:"";position:absolute;z-index:-1;top:0;right:-35px;width:65px;height:100%;background:var(--xen-accent);clip-path:polygon(0 0,100% 0,100% 100%,50% 100%);}
+.xen-service-ribbon-title strong{font-size:clamp(12px,1.5vw,17px);font-weight:900;line-height:1.22;text-transform:uppercase;letter-spacing:.2px;}
+.xen-service-ribbon-icons{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:stretch;padding:8px 3px;}
+.xen-ribbon-icon{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:4px 2px;border-right:1px solid #a5a5a5;color:var(--xen-accent);text-align:center;}
+.xen-ribbon-icon:last-child{border-right:0;}
+.xen-ribbon-label{color:#1b1b1b;font-size:clamp(7px,.82vw,10px);font-weight:850;line-height:1.2;text-align:center;text-transform:uppercase;}
+.xen-footer{display:flex;flex-direction:column;gap:0;overflow:hidden;border:1px solid #15191f;border-radius:0;}
+.xen-footer-main{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:0;min-height:68px;padding:10px 14px;color:#fff;background:#11151b;}
+.xen-footer-main>div{display:flex;flex-wrap:wrap;align-items:center;align-content:center;gap:7px;padding:0 10px;border-right:1px solid #555;font-size:11px;line-height:1.48;}
+.xen-footer-main>div:first-child{padding-left:0;}.xen-footer-main>div:last-child{border-right:0;}
+.xen-footer-main>div>svg,.xen-footer-main span svg{color:#fff;flex:0 0 auto;}
+.xen-footer-main .xen-inline-edit{color:#fff;}
+.xen-footer-main .xen-inline-edit:empty:before{color:#ddd;}
+.xen-footer-main .xen-inline-edit:hover,.xen-footer-main .xen-inline-edit:focus{outline-color:#fff;background:#ffffff13;}
+.xen-footer-contact{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;}
+.xen-footer-contact>span,.xen-footer-main>div:last-child>span{display:flex;align-items:center;gap:7px;max-width:100%;}
+.xen-footer-strip{display:flex;align-items:center;justify-content:center;min-height:65px;padding:18px 10px;text-align:center;color:#fff;background:linear-gradient(90deg,#4b090f,#71101d);font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;}
+.xen-footer-strip .xen-inline-edit{max-width:100%;margin:0 22px;}
+.xen-footer-strip:before,.xen-footer-strip:after{content:"";display:block;flex:1;height:1px;max-width:22%;background:#f1dfe2;}
+.xen-footer-strip .xen-inline-edit:hover,.xen-footer-strip .xen-inline-edit:focus{outline-color:#fff;background:#ffffff16;}
+
+@media(max-width:760px){
+  .xenmark-invoice{gap:10px;font-size:10px;}
+  .xen-masthead{grid-template-columns:minmax(100px,.58fr) minmax(0,1.42fr);gap:10px;min-height:125px;padding:2px 1px 8px;}
+  .xen-logo-side{padding:0 9px 0 0;border-right-width:2px;}
+  .xen-logo-target{height:90px;}
+  .xenmark-invoice .xen-masthead:after{width:54px;height:58px;top:-8px;right:-6px;opacity:.7;}
+  .xen-manufacturer-title{font-size:13px;letter-spacing:.5px;}
+  .xen-service-line{font-size:9px;letter-spacing:0;}
+  .xen-service-line-secondary{margin-top:-4px;}
+  .xen-service-icons{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .xen-service-icon{padding:5px 3px;border-bottom:1px solid #ddd;}
+  .xen-service-icon svg{width:15px;height:15px;}
+  .xen-service-label{font-size:7px;}
+  .xen-invoice-band{grid-template-columns:minmax(0,1fr) minmax(145px,.72fr);gap:8px;min-height:65px;padding:10px 12px;}
+  .xen-invoice-heading{font-size:clamp(24px,6.5vw,36px);}
+  .xen-invoice-band:after{right:28%;width:54px;}
+  .xen-invoice-quick-meta>div{grid-template-columns:55px 5px minmax(0,1fr);gap:4px;font-size:8px;}
+  .xen-party-grid{gap:8px;}
+  .xen-party-card{min-height:0;}
+  .xen-party-card h3{padding:8px 10px;font-size:10px;}
+  .xen-party-details{gap:6px;padding:8px;}
+  .xen-party-details>div{grid-template-columns:minmax(47px,.48fr) 5px minmax(0,1fr);gap:4px;font-size:9px;}
+  .xen-date-strip{grid-template-columns:repeat(2,minmax(0,1fr));padding:5px;}
+  .xen-date-strip>div{padding:7px 6px;gap:6px;}
+  .xen-date-strip>div:nth-child(2){border-right:0;}
+  .xen-date-strip>div:nth-child(-n+2){border-bottom:1px solid #ddd;}
+  .xen-meta-symbol{flex-basis:22px;}
+  .xen-date-strip small{font-size:8px;}
+  .xen-date-strip b{font-size:9px;}
+  .xen-items-table{font-size:9px;}
+  .xen-items-table th{padding:8px 4px;font-size:9px;}
+  .xen-items-table td{padding:7px 5px;}
+  .xen-line-description{font-size:8px;}
+  .xen-payment-total-grid{grid-template-columns:1fr;}
+  .xen-payment-content{grid-template-columns:minmax(125px,.72fr) minmax(0,1fr);gap:8px;padding:8px;}
+  .xen-qr-card{padding:4px;}
+  .xen-qr-brand{font-size:12px;}
+  .xen-payment-instructions{gap:6px;font-size:9px;}
+  .xen-payment-instructions>b{font-size:9px;padding:6px;}
+  .xen-payment-numbers{font-size:9px;}
+  .xen-total-line{padding:8px 10px;font-size:10px;}
+  .xen-grand-total{font-size:14px;}
+  .xen-thank-you{min-height:76px;padding:9px;}
+  .xen-thank-you strong{font-size:28px;}
+  .xen-service-ribbon{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);min-height:67px;}
+  .xen-service-ribbon-title{padding:9px 11px;}
+  .xen-service-ribbon-title:after{right:-26px;width:45px;}
+  .xen-service-ribbon-title strong{font-size:11px;}
+  .xen-service-ribbon-icons{grid-template-columns:repeat(4,minmax(0,1fr));padding:4px 2px;}
+  .xen-ribbon-icon{gap:3px;padding:3px 1px;border-bottom:1px solid #ddd;}
+  .xen-ribbon-icon svg{width:14px;height:14px;}
+  .xen-ribbon-label{font-size:7px;}
+  .xen-footer-main{grid-template-columns:1fr;padding:8px 10px;}
+  .xen-footer-main>div{padding:6px 0;border-right:0;border-bottom:1px solid #414141;font-size:9px;}
+  .xen-footer-main>div:last-child{border-bottom:0;}
+  .xen-footer-strip{padding:8px;font-size:8px;letter-spacing:1.8px;}
+}
+@media(max-width:520px){
+  .xenmark-invoice{gap:9px;}
+  .xen-masthead{grid-template-columns:76px minmax(0,1fr);gap:8px;min-height:126px;}
+  .xen-logo-target{height:78px;}
+  .xenmark-invoice .xen-masthead:after{display:none;}
+  .xen-logo-target .xen-upload-empty{gap:4px;padding:4px;}
+  .xen-logo-target .xen-upload-empty svg{width:22px;height:22px;}
+  .xen-logo-target .xen-upload-empty b{font-size:7px;}
+  .xen-logo-target .xen-upload-empty small{font-size:6px;}
+  .xen-manufacturer-title{font-size:11px;letter-spacing:.25px;}
+  .xen-business-head{gap:5px;padding-right:1px;}
+  .xen-service-line{font-size:7.5px;line-height:1.35;}
+  .xen-service-icons{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .xen-service-icon{gap:3px;padding:4px 1px;}
+  .xen-service-icon svg{width:12px;height:12px;}
+  .xen-service-label{font-size:6px;}
+  .xen-invoice-band{grid-template-columns:1fr;gap:8px;padding:10px 11px;}
+  .xen-invoice-heading{font-size:28px;}
+  .xen-invoice-band:after{right:15%;width:42px;}
+  .xen-invoice-quick-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;}
+  .xen-invoice-quick-meta>div{display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-size:8px;}
+  .xen-invoice-quick-meta .xen-meta-colon{display:none;}
+  .xen-invoice-quick-meta>div .xen-inline-edit{max-width:100%;}
+  .xen-party-grid{grid-template-columns:1fr;gap:8px;}
+  .xen-party-card{min-height:130px;}
+  .xen-party-details{padding:8px 10px 10px;}
+  .xen-party-details>div{grid-template-columns:minmax(78px,.42fr) 5px minmax(0,1fr);font-size:10px;}
+  .xen-table-wrap{overflow:visible;}
+  .xen-items-table,.xen-items-table tbody{display:block;width:100%;min-width:0;}
+  .xen-items-table thead{display:none;}
+  .xen-items-table tbody{counter-reset:xen-item;}
+  .xen-items-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:1px solid #cfcfcf;counter-increment:xen-item;}
+  .xen-items-table tbody td{display:block;min-width:0;padding:8px;border-top:0;border-right:1px solid #dedede;font-size:10px;}
+  .xen-items-table tbody td:nth-child(1){display:none;}
+  .xen-items-table tbody td:nth-child(2){grid-column:1 / -1;border-right:0;border-bottom:1px solid #dedede;}
+  .xen-items-table tbody td:nth-child(2)::before{content:"ITEM " counter(xen-item) " · DESCRIPTION";display:block;margin-bottom:5px;color:#777;font-size:8px;font-weight:900;letter-spacing:.06em;}
+  .xen-items-table tbody td:nth-child(3)::before,.xen-items-table tbody td:nth-child(4)::before,.xen-items-table tbody td:nth-child(5)::before{display:block;margin-bottom:3px;color:#777;font-size:8px;font-weight:850;text-align:left;}
+  .xen-items-table tbody td:nth-child(3)::before{content:"PIECES";}
+  .xen-items-table tbody td:nth-child(4)::before{content:"RATE (₹)";}
+  .xen-items-table tbody td:nth-child(5)::before{content:"AMOUNT (₹)";}
+  .xen-items-table tbody td:nth-child(5){border-right:0;}
+  .xen-items-table .xen-centered{text-align:left;}
+  .xen-items-table .xen-inline-edit{min-height:20px;}
+  .xen-items-table .xen-line-name{font-size:11px;}
+  .xen-items-table .xen-empty-row{grid-column:1 / -1;}
+  .xen-payment-content{grid-template-columns:minmax(100px,.8fr) minmax(0,1.2fr);gap:7px;padding:7px;}
+  .xen-qr-brand{font-size:10px;padding:4px 1px;}
+  .xen-qr-target .xen-upload-empty{gap:3px;padding:4px;}
+  .xen-qr-target .xen-upload-empty svg{width:20px;height:20px;}
+  .xen-qr-target .xen-upload-empty b{font-size:8px;}
+  .xen-qr-target .xen-upload-empty small{font-size:7px;}
+  .xen-qr-caption{font-size:9px;}
+  .xen-qr-caption small{font-size:7px;}
+  .xen-payment-instructions{font-size:8px;line-height:1.4;}
+  .xen-payment-status{padding:5px;font-size:8px;}
+  .xen-payment-numbers{font-size:8px;}
+  .xen-service-ribbon{grid-template-columns:1fr;}
+  .xen-service-ribbon-title{padding:8px 12px;}
+  .xen-service-ribbon-title:after{right:-24px;width:48px;}
+  .xen-service-ribbon-title strong{font-size:11px;}
+  .xen-service-ribbon-icons{grid-template-columns:repeat(4,minmax(0,1fr));padding:5px 2px;}
+  .xen-ribbon-icon{min-height:44px;}
+  .xen-footer-main>div{gap:7px;}
+  .xen-footer-strip{letter-spacing:1.1px;}
+  .xen-footer-strip .xen-inline-edit{margin:0 8px;}
+  .xen-footer-strip:before,.xen-footer-strip:after{max-width:13%;}
+}
+
+/* Reference-specific details: editable lines, corner accents and true invoice proportions. */
+.xenmark-invoice .xen-customer-value { display:block; width:100%; min-height:18px; }
+.xenmark-invoice .xen-customer-address { min-height:30px; }
+.xenmark-invoice .xen-customer-value:empty { border-bottom:1px solid #8a8a8a; }
+.xenmark-invoice .xen-party-details>div>span:first-child { color:#1d2024; }
+.xenmark-invoice .xen-payment-box { min-height:250px; }
+.xenmark-invoice .xen-total-box { min-height:250px; }
+.xenmark-invoice .xen-qr-target { max-width:150px; }
+.xenmark-invoice .xen-signature-target .xen-upload-empty { opacity:0; transition:opacity .12s ease; }
+.xenmark-invoice .xen-signature-target:hover .xen-upload-empty,
+.xenmark-invoice .xen-signature-target:focus-within .xen-upload-empty { opacity:1; }
+.xenmark-invoice .xen-invoice-band { background:linear-gradient(105deg,#741020 0%,#8f1429 65%,#600b1b 100%); }
+.xenmark-invoice .xen-invoice-band:before { content:""; position:absolute; z-index:-1; top:0; right:28%; width:82px; height:100%; background:#fff; clip-path:polygon(59% 0,100% 0,41% 100%,0 100%); }
+.xenmark-invoice .xen-masthead:after { content:""; position:absolute; z-index:0; top:-30px; right:-14px; width:112px; height:122px; pointer-events:none; opacity:.96; background:repeating-linear-gradient(45deg,transparent 0 13px,#7b1022 13px 21px,#fff 21px 27px,#11151b 27px 35px,#fff 35px 41px); clip-path:polygon(35% 0,100% 0,100% 100%); }
+.xenmark-invoice .xen-business-head { position:relative; z-index:1; }
+
+
+.xenmark-invoice .xen-total-box { position:relative; isolation:isolate; }
+.xenmark-invoice .xen-total-box:after { content:""; position:absolute; z-index:0; right:0; bottom:0; width:190px; height:98px; pointer-events:none; opacity:.7; background:linear-gradient(135deg,transparent 0 31%,#eeeaec 31% 49%,transparent 49% 58%,#e5dadd 58% 72%,transparent 72%); }
+.xenmark-invoice .xen-total-box>.xen-total-line,
+.xenmark-invoice .xen-total-box>.xen-grand-total,
+.xenmark-invoice .xen-total-box>.xen-thank-you { position:relative; z-index:1; }
+
+@media print{
+  .xenmark-invoice{gap:3mm;font-size:10pt;}
+  .xen-inline-edit{outline:0!important;background:transparent!important;}
+  .xen-upload-target{border-color:transparent!important;}
+  .xen-upload-empty,.xen-upload-chip,.xen-upload-target input{display:none!important;}
+  .xenmark-invoice .xen-masthead{min-height:50mm;}
+  .xenmark-invoice .xen-party-card{min-height:49mm;}
+  .xenmark-invoice .xen-footer-main,.xenmark-invoice .xen-footer-strip,.xenmark-invoice .xen-invoice-band,.xenmark-invoice .xen-items-table th,.xenmark-invoice .xen-party-card h3,.xenmark-invoice .xen-payment-box>h3,.xenmark-invoice .xen-grand-total,.xenmark-invoice .xen-service-ribbon-title{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .xenmark-invoice .xen-items-table tr,.xenmark-invoice .xen-payment-total-grid{break-inside:avoid;}
+  .xen-signature-target{border-color:transparent!important;}
+}
+
+
+.xen-upload-empty,.xen-upload-chip{border:0;font:inherit;cursor:pointer;}
+.xen-upload-empty{width:100%;height:100%;background:transparent;}
+.xen-upload-chip{z-index:3;}
+.xen-upload-target.is-dragging{outline:2px solid var(--xen-accent);outline-offset:2px;}
+@media(max-width:600px){.xen-upload-chip{opacity:1;min-height:26px;padding:5px 7px;font-size:9px}.xen-logo-target{height:clamp(90px,28vw,170px)}.xen-add-item-editor{font-size:10px!important;min-height:40px!important}}
+
+/* Exact reference layout: fixed A4 grid that scales as one complete sheet on desktop/mobile. */
+.ic-invoice-paper.template-xenmark { container-type:inline-size; aspect-ratio:210 / 297; height:auto!important; min-height:0!important; max-height:none!important; padding:1.35cqw!important; overflow:hidden!important; background:#fff!important; border:0!important; border-radius:0!important; }
+.ic-invoice-paper.template-xenmark.is-landscape { aspect-ratio:297 / 210; }
+.ic-invoice-paper.template-xenmark .xenmark-invoice {
+  display:grid!important; grid-template-rows:minmax(0,15.5fr) minmax(0,6fr) minmax(0,17fr) minmax(0,5.1fr) minmax(0,15fr) minmax(0,21fr) minmax(0,6.5fr) minmax(0,9.5fr);
+  gap:.6cqw!important; width:100%; height:100%; min-height:0!important; overflow:hidden!important;
+  font-size:clamp(5.5px,1.53cqw,13px)!important; line-height:1.28!important; background:#fff;
+}
+.ic-invoice-paper.template-xenmark .xenmark-invoice>* { width:100%; min-width:0; min-height:0!important; height:100%; overflow:hidden!important; }
+.ic-invoice-paper.template-xenmark .xen-masthead { grid-template-columns:minmax(0,.78fr) minmax(0,1fr)!important; gap:2cqw!important; padding:0 0 .6cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-logo-side { padding:0 1.6cqw 0 .2cqw!important; border-right:2px solid #791a2c!important; }
+.ic-invoice-paper.template-xenmark .xen-logo-target { width:100%!important; height:100%!important; max-width:none!important; min-height:0!important; }
+.ic-invoice-paper.template-xenmark .xen-logo-target>img { width:100%!important; height:100%!important; object-fit:contain!important; }
+.ic-invoice-paper.template-xenmark .xen-business-head { gap:.75cqw!important; padding:0 .4cqw 0 0!important; }
+.ic-invoice-paper.template-xenmark .xen-manufacturer-title { font-size:clamp(6px,1.48cqw,15px)!important; line-height:1.16!important; letter-spacing:.12cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-line { font-size:clamp(5px,1.14cqw,12px)!important; line-height:1.28!important; letter-spacing:.035cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-line-secondary { margin-top:-.35cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-icons { grid-template-columns:repeat(7,minmax(0,1fr))!important; margin-top:.2cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-icon { gap:.35cqw!important; padding:.65cqw .2cqw .1cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-icon svg { width:2cqw!important; height:2cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-label { font-size:clamp(4px,.78cqw,8px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-invoice-band { grid-template-columns:minmax(0,1.15fr) minmax(0,.65fr)!important; gap:1cqw!important; min-height:0!important; padding:.65cqw 1.8cqw!important; border-radius:.5cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-invoice-band:after { width:7cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-invoice-heading { font-size:clamp(18px,5.4cqw,48px)!important; line-height:1!important; letter-spacing:.06cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-invoice-quick-meta { gap:.12cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-invoice-quick-meta>div { grid-template-columns:6.4cqw 1cqw minmax(0,1fr)!important; gap:.35cqw!important; font-size:clamp(5px,1.08cqw,10px)!important; line-height:1.15!important; }
+.ic-invoice-paper.template-xenmark .xen-party-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:1.15cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-party-card { min-height:0!important; height:100%!important; border-radius:.45cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-party-card h3 { min-width:42%!important; gap:.8cqw!important; padding:.65cqw 1.2cqw!important; font-size:clamp(5px,1.12cqw,11px)!important; line-height:1.15!important; }
+.ic-invoice-paper.template-xenmark .xen-party-heading-icon,.ic-invoice-paper.template-xenmark .xen-party-grid-icon { flex-basis:1.8cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-party-heading-icon svg,.ic-invoice-paper.template-xenmark .xen-party-grid-icon svg { width:1.6cqw!important; height:1.6cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-party-details { gap:.55cqw!important; padding:1cqw 1.3cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-party-details>div { grid-template-columns:minmax(0, .48fr) .55cqw minmax(0,1fr)!important; gap:.5cqw!important; font-size:clamp(5px,1.04cqw,10px)!important; line-height:1.27!important; }
+.ic-invoice-paper.template-xenmark .xen-customer-address { min-height:0!important; }
+.ic-invoice-paper.template-xenmark .xen-customer-value { min-height:0!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip { grid-template-columns:repeat(4,minmax(0,1fr))!important; gap:0!important; min-height:0!important; padding:.4cqw!important; border-radius:.45cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip>div { min-width:0; gap:.75cqw!important; padding:.25cqw .8cqw!important; border-right:1px solid #aaa!important; border-bottom:0!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip>div:last-child { border-right:0!important; }
+.ic-invoice-paper.template-xenmark .xen-meta-symbol { flex-basis:2.6cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-meta-symbol svg { width:2.3cqw!important; height:2.3cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip small { font-size:clamp(4.5px,.9cqw,9px)!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip b,.ic-invoice-paper.template-xenmark .xen-meta-inline>small { font-size:clamp(5px,1cqw,10px)!important; }
+.ic-invoice-paper.template-xenmark .xen-date-strip>div>span:last-child,.ic-invoice-paper.template-xenmark .xen-meta-content { gap:.15cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-meta-edit-line { min-height:0!important; }
+.ic-invoice-paper.template-xenmark .xen-table-wrap { height:100%!important; min-height:0!important; display:flex!important; flex-direction:column!important; border-radius:.45cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table { flex:1 1 auto!important; height:100%!important; font-size:var(--xen-item-font,1cqw)!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table thead { display:table-header-group!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table tbody { display:table-row-group!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table tr { display:table-row!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table th { padding:.7cqw .5cqw!important; font-size:clamp(4.5px,1.02cqw,10px)!important; line-height:1.08!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table td { padding:var(--xen-item-pad,.6cqw) .7cqw!important; font-size:clamp(4.8px,var(--xen-item-font,1cqw),10px)!important; line-height:1.13!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table .xen-line-name { font-size:inherit!important; line-height:1.13!important; }
+.ic-invoice-paper.template-xenmark .xen-items-table .xen-line-description { display:none!important; }
+.ic-invoice-paper.template-xenmark .xen-add-item-editor { min-height:0!important; flex:0 0 auto!important; padding:.25cqw!important; font-size:clamp(5px,.82cqw,8px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-total-grid { grid-template-columns:minmax(0,1.18fr) minmax(0,.9fr)!important; gap:1.25cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-box,.ic-invoice-paper.template-xenmark .xen-total-box { min-width:0!important; min-height:0!important; height:100%!important; border-radius:.45cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-box>h3 { width:70%!important; min-width:0!important; padding:.65cqw 1.2cqw!important; font-size:clamp(6px,1.35cqw,13px)!important; line-height:1.05!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-content { height:calc(100% - 2.9cqw); grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important; gap:.75cqw!important; padding:.7cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-card { min-height:0!important; padding:.3cqw!important; border-width:1px!important; border-radius:.55cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-brand { gap:.25cqw!important; padding:.2cqw!important; font-size:clamp(5px,1.08cqw,10px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-phonepe-mark { width:1.5cqw!important; height:1.5cqw!important; flex-basis:1.5cqw!important; font-size:1cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-target { width:min(100%,10.5cqw)!important; max-width:10.5cqw!important; min-height:0!important; flex:0 1 auto!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-target img { padding:.25cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-caption { gap:.12cqw!important; padding:.25cqw 0!important; font-size:clamp(4.5px,.85cqw,8px)!important; }
+.ic-invoice-paper.template-xenmark .xen-qr-caption small { font-size:clamp(4px,.7cqw,7px)!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-instructions { gap:.42cqw!important; font-size:clamp(4.3px,.84cqw,8px)!important; line-height:1.28!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-instructions>b { padding:.5cqw .3cqw!important; font-size:clamp(4.5px,.82cqw,8px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-instructions>p { line-height:1.24!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-status { padding:.3cqw!important; font-size:clamp(4px,.7cqw,7px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-payment-numbers { gap:.25cqw!important; font-size:clamp(4px,.72cqw,7px)!important; line-height:1.15!important; }
+.ic-invoice-paper.template-xenmark .xen-total-line { min-height:0!important; padding:.72cqw 1.05cqw!important; font-size:clamp(4.5px,.9cqw,9px)!important; line-height:1.1!important; }
+.ic-invoice-paper.template-xenmark .xen-grand-total { min-height:0!important; padding:.78cqw 1.1cqw!important; font-size:clamp(6px,1.52cqw,14px)!important; line-height:1.05!important; }
+.ic-invoice-paper.template-xenmark .xen-thank-you { min-height:0!important; padding:.7cqw!important; gap:.3cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-thank-you strong { font-size:clamp(16px,3.8cqw,36px)!important; line-height:1!important; }
+.ic-invoice-paper.template-xenmark .xen-thank-you small { font-size:clamp(4px,.75cqw,7px)!important; }
+.ic-invoice-paper.template-xenmark .xen-service-ribbon { grid-template-columns:minmax(0,.83fr) minmax(0,2fr)!important; min-height:0!important; border-radius:.4cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-ribbon-title { padding:.55cqw 1.1cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-service-ribbon-title strong { font-size:clamp(5px,1.24cqw,12px)!important; line-height:1.15!important; }
+.ic-invoice-paper.template-xenmark .xen-service-ribbon-icons { grid-template-columns:repeat(7,minmax(0,1fr))!important; padding:.35cqw .2cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-ribbon-icon { min-height:0!important; gap:.2cqw!important; padding:.25cqw .1cqw!important; border-bottom:0!important; }
+.ic-invoice-paper.template-xenmark .xen-ribbon-icon svg { width:1.55cqw!important; height:1.55cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-ribbon-label { font-size:clamp(3.8px,.7cqw,7px)!important; line-height:1.08!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-main { grid-template-columns:1.2fr 1fr 1fr!important; min-height:0!important; height:57%!important; padding:.55cqw .8cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-main>div { gap:.35cqw!important; padding:0 .5cqw!important; border-right:1px solid #555!important; border-bottom:0!important; font-size:clamp(4px,.72cqw,7px)!important; line-height:1.2!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-main>div:first-child { padding-left:0!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-main>div:last-child { border-right:0!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-strip { min-height:0!important; height:43%!important; padding:.65cqw .5cqw!important; font-size:clamp(4px,.72cqw,7px)!important; line-height:1.1!important; letter-spacing:.45cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-footer-strip .xen-inline-edit { margin:0 .6cqw!important; }
+.ic-invoice-paper.template-xenmark .xen-add-item-editor,
+.ic-invoice-paper.template-xenmark .xen-upload-chip,
+.ic-invoice-paper.template-xenmark .xen-upload-empty,
+.ic-invoice-paper.template-xenmark .xen-upload-target input { -webkit-print-color-adjust:exact; }
+
+/* Keep the reference's desktop table and two-column invoice on phones; the sheet itself scales. */
+@media (max-width:760px) {
+  .ic-invoice-paper.template-xenmark .xen-masthead { grid-template-columns:minmax(0,.78fr) minmax(0,1fr)!important; min-height:0!important; }
+  .ic-invoice-paper.template-xenmark .xen-service-icons { grid-template-columns:repeat(7,minmax(0,1fr))!important; }
+  .ic-invoice-paper.template-xenmark .xen-party-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+  .ic-invoice-paper.template-xenmark .xen-date-strip { grid-template-columns:repeat(4,minmax(0,1fr))!important; }
+  .ic-invoice-paper.template-xenmark .xen-date-strip>div:nth-child(-n+2) { border-bottom:0!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table,.ic-invoice-paper.template-xenmark .xen-items-table tbody { display:table!important; width:100%!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table thead { display:table-header-group!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table tbody { display:table-row-group!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table tbody tr { display:table-row!important; grid-template-columns:none!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table tbody td { display:table-cell!important; padding:var(--xen-item-pad,.5cqw)!important; font-size:clamp(4.6px,var(--xen-item-font,1cqw),9px)!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table tbody td:nth-child(1) { display:table-cell!important; }
+  .ic-invoice-paper.template-xenmark .xen-items-table tbody td:nth-child(2)::before,.ic-invoice-paper.template-xenmark .xen-items-table tbody td:nth-child(3)::before,.ic-invoice-paper.template-xenmark .xen-items-table tbody td:nth-child(4)::before,.ic-invoice-paper.template-xenmark .xen-items-table tbody td:nth-child(5)::before { display:none!important; content:none!important; }
+  .ic-invoice-paper.template-xenmark .xen-payment-total-grid { grid-template-columns:minmax(0,1.18fr) minmax(0,.9fr)!important; }
+  .ic-invoice-paper.template-xenmark .xen-payment-content { grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important; }
+  .ic-invoice-paper.template-xenmark .xen-service-ribbon { grid-template-columns:minmax(0,.83fr) minmax(0,2fr)!important; }
+  .ic-invoice-paper.template-xenmark .xen-service-ribbon-icons { grid-template-columns:repeat(7,minmax(0,1fr))!important; }
+  .ic-invoice-paper.template-xenmark .xen-footer-main { grid-template-columns:1.2fr 1fr 1fr!important; }
+}
+
+@media print {
+  @page { size:A4 portrait; margin:0; }
+  .invoice-creator .ic-preview-area { position:fixed!important; inset:0 auto auto 0!important; width:210mm!important; max-width:210mm!important; margin:0!important; padding:0!important; overflow:visible!important; }
+  .invoice-creator .ic-paper-wrap { width:210mm!important; max-width:210mm!important; min-height:0!important; max-height:none!important; margin:0!important; padding:0!important; overflow:visible!important; border:0!important; background:#fff!important; }
+  .invoice-creator .ic-invoice-paper.template-xenmark { position:fixed!important; left:0!important; top:0!important; width:210mm!important; height:297mm!important; max-width:none!important; max-height:297mm!important; min-height:0!important; aspect-ratio:auto!important; margin:0!important; padding:3mm!important; overflow:hidden!important; border:0!important; border-radius:0!important; box-shadow:none!important; zoom:1!important; transform:none!important; }
+  .invoice-creator .ic-invoice-paper.template-xenmark.is-landscape { width:297mm!important; height:210mm!important; max-width:297mm!important; max-height:210mm!important; }
+  .invoice-creator .ic-invoice-paper.template-xenmark .xenmark-invoice { width:100%!important; height:100%!important; min-height:0!important; overflow:hidden!important; }
+  .invoice-creator .ic-invoice-paper.template-xenmark .xen-add-item-editor,.invoice-creator .ic-invoice-paper.template-xenmark .xen-upload-chip,.invoice-creator .ic-invoice-paper.template-xenmark .xen-upload-empty { display:none!important; }
+  .invoice-creator .ic-invoice-paper.template-xenmark .xen-upload-target { border-color:transparent!important; }
+}
