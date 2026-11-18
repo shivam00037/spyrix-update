@@ -1837,316 +1837,360 @@
     </footer>
 
     <script>
-      // --------------------------------------------------
-      // SPYRIX INTRO: FEEDBACK FORM
-      // --------------------------------------------------
-      const feedbackForm = document.getElementById("introFeedbackForm");
+      (() => {
+        "use strict";
 
-      if (feedbackForm) {
-        feedbackForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
+        /* =========================================
+     SPYRIX INTRO — INITIAL ELEMENTS
+  ========================================= */
+        const loader = document.getElementById("siteLoader");
+        const nav = document.getElementById("navLinks");
+        const menuButton = document.getElementById("menuBtn");
 
-          const submit = feedbackForm.querySelector('button[type="submit"]');
-          const status = document.getElementById("introFeedbackStatus");
-          const data = new FormData(feedbackForm);
+        let loaderTimer = null;
 
-          const payload = {
-            name: String(data.get("name") || "").trim(),
-            email: String(data.get("email") || "").trim(),
-            message: String(data.get("message") || "").trim(),
-            rating: data.get("rating") ? Number(data.get("rating")) : null,
-            source: "intro",
-            website: String(data.get("website") || ""),
-          };
+        /* =========================================
+     LOADER
+  ========================================= */
+        function hideLoader() {
+          if (loader) loader.classList.add("is-hidden");
+        }
 
-          if (payload.name.length < 2 || payload.message.length < 10) {
-            status.textContent =
-              "Please add your name and a little more detail.";
-            status.classList.add("error");
+        function showLoader() {
+          if (loader) loader.classList.remove("is-hidden");
+        }
+
+        function scheduleLoaderHide(delay = 2300) {
+          clearTimeout(loaderTimer);
+          loaderTimer = setTimeout(hideLoader, delay);
+        }
+
+        scheduleLoaderHide();
+
+        /* =========================================
+     LOGIN / REGISTER NAVIGATION
+     React routes: /login and /register
+     The intro runs inside a srcDoc iframe.
+  ========================================= */
+        function navigateToApp(path) {
+          const allowedPaths = ["/login", "/register", "/app/dashboard"];
+
+          if (!allowedPaths.includes(path)) {
+            console.error("Invalid SPYRIX navigation path:", path);
             return;
           }
 
-          submit.disabled = true;
-          submit.textContent = "Sending feedback…";
-          status.classList.remove("error");
-          status.textContent = "";
+          showLoader();
+          clearTimeout(loaderTimer);
+
+          loaderTimer = setTimeout(() => {
+            try {
+              // Use the parent app's real URL as the base.
+              const appWindow = window.top || window;
+              const destination = new URL(path, appWindow.location.href);
+
+              // This navigates the main browser window, not the iframe.
+              appWindow.location.assign(destination.href);
+            } catch (error) {
+              console.error("SPYRIX navigation failed:", error);
+              hideLoader();
+            }
+          }, 2300);
+        }
+
+        // Get started, Create workspace, and other registration CTAs.
+        document.querySelectorAll("[data-enter]").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.preventDefault();
+            navigateToApp("/register");
+          });
+        });
+
+        // Header login.
+        const loginLink = document.getElementById("loginLink");
+        if (loginLink) {
+          loginLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            navigateToApp("/login");
+          });
+        }
+
+        // Footer login.
+        const footerLogin = document.getElementById("footerLogin");
+        if (footerLogin) {
+          footerLogin.addEventListener("click", (event) => {
+            event.preventDefault();
+            navigateToApp("/login");
+          });
+        }
+
+        /* =========================================
+     BRAND LOGOS
+  ========================================= */
+        document.querySelectorAll(".brand, #footLogo").forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            clearTimeout(loaderTimer);
+            showLoader();
+
+            loaderTimer = setTimeout(() => {
+              hideLoader();
+
+              const home = document.getElementById("home");
+              if (home) {
+                home.scrollIntoView({
+                  behavior: window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                  ).matches
+                    ? "auto"
+                    : "smooth",
+                  block: "start",
+                });
+              }
+            }, 700);
+          });
+        });
+
+        /* =========================================
+     FOOTER YEAR
+  ========================================= */
+        const yearElement = document.getElementById("yearNow");
+        if (yearElement) {
+          yearElement.textContent = new Date().getFullYear();
+        }
+
+        /* =========================================
+     FEEDBACK FORM
+  ========================================= */
+        const feedbackForm = document.getElementById("introFeedbackForm");
+
+        if (feedbackForm) {
+          feedbackForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const submitButton = feedbackForm.querySelector(
+              'button[type="submit"]',
+            );
+            const status = document.getElementById("introFeedbackStatus");
+
+            if (!submitButton || !status) return;
+
+            const formData = new FormData(feedbackForm);
+
+            const payload = {
+              name: String(formData.get("name") || "").trim(),
+              email: String(formData.get("email") || "").trim(),
+              message: String(formData.get("message") || "").trim(),
+              rating: formData.get("rating")
+                ? Number(formData.get("rating"))
+                : null,
+              source: "intro",
+              website: String(formData.get("website") || "").trim(),
+            };
+
+            if (payload.name.length < 2) {
+              status.textContent = "Please enter your name.";
+              status.classList.add("error");
+              return;
+            }
+
+            if (payload.message.length < 10) {
+              status.textContent =
+                "Please enter at least 10 characters of feedback.";
+              status.classList.add("error");
+              return;
+            }
+
+            if (!payload.email) {
+              status.textContent = "Please enter your email address.";
+              status.classList.add("error");
+              return;
+            }
+
+            if (payload.website) {
+              // Honeypot: silently reject automated submissions.
+              status.textContent =
+                "Thank you. Your feedback has been received.";
+              feedbackForm.reset();
+              return;
+            }
+
+            const configuredEndpoint =
+              typeof window.SPYRIX_FEEDBACK_ENDPOINT === "string"
+                ? window.SPYRIX_FEEDBACK_ENDPOINT.trim()
+                : "";
+
+            const endpoint = configuredEndpoint || "/api/v1/feedback";
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending feedback…";
+            status.classList.remove("error");
+            status.textContent = "";
+
+            try {
+              const response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              });
+
+              const result = await response.json().catch(() => ({}));
+
+              if (!response.ok) {
+                throw new Error(
+                  result.message ||
+                    "We couldn't send your feedback. Please try again.",
+                );
+              }
+
+              status.textContent =
+                "Thank you! Your feedback has been sent to the SPYRIX team.";
+
+              feedbackForm.reset();
+            } catch (error) {
+              console.error("SPYRIX feedback error:", error);
+
+              status.classList.add("error");
+              status.textContent =
+                error.message ||
+                "Could not send your feedback. Please try again.";
+            } finally {
+              submitButton.disabled = false;
+              submitButton.textContent = "Send feedback ↗";
+            }
+          });
+        }
+
+        /* =========================================
+     MOBILE NAVIGATION
+  ========================================= */
+        if (menuButton && nav) {
+          menuButton.addEventListener("click", () => {
+            const isOpen = nav.classList.toggle("open");
+
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+            menuButton.setAttribute(
+              "aria-label",
+              isOpen ? "Close navigation" : "Open navigation",
+            );
+            menuButton.textContent = isOpen ? "×" : "☰";
+          });
+        }
+
+        function closeMobileMenu() {
+          if (!menuButton || !nav) return;
+
+          nav.classList.remove("open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Open navigation");
+          menuButton.textContent = "☰";
+        }
+
+        /* =========================================
+     INTRO SECTION SCROLLING
+  ========================================= */
+        function scrollToIntroSection(target) {
+          if (!target) return;
+
+          const header = document.querySelector(".top");
+          const headerHeight = header
+            ? header.getBoundingClientRect().height
+            : 0;
+
+          const offset = headerHeight + 14;
+          const top = Math.max(
+            0,
+            target.getBoundingClientRect().top + window.scrollY - offset,
+          );
+
+          const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          ).matches;
+
+          window.scrollTo({
+            top,
+            behavior: reducedMotion ? "auto" : "smooth",
+          });
+        }
+
+        document.addEventListener("click", (event) => {
+          if (event.defaultPrevented) return;
+
+          const targetElement = event.target;
+          if (!(targetElement instanceof Element)) return;
+
+          const link = targetElement.closest('a[href^="#"]');
+          if (!link) return;
+
+          // Brand links have their own handler above.
+          if (link.id === "footLogo" || link.classList.contains("brand")) {
+            return;
+          }
+
+          const href = link.getAttribute("href");
+          if (!href || href === "#") return;
+
+          let sectionId;
 
           try {
-            const endpoint =
-              window.SPYRIX_FEEDBACK_ENDPOINT || "/api/v1/feedback";
+            sectionId = decodeURIComponent(href.slice(1));
+          } catch {
+            sectionId = href.slice(1);
+          }
 
-            const response = await fetch(endpoint, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(payload),
-            });
+          const section = document.getElementById(sectionId);
+          if (!section) return;
 
-            const result = await response.json().catch(() => ({}));
+          event.preventDefault();
 
-            if (!response.ok) {
-              throw new Error(
-                result.message ||
-                  "We could not send this feedback. Please try again.",
-              );
-            }
+          scrollToIntroSection(section);
 
-            status.textContent =
-              "Thank you! Your feedback has been sent to the SPYRIX team.";
-
-            feedbackForm.reset();
+          // Keep the current page and its section in sync.
+          try {
+            history.replaceState(null, "", "#" + encodeURIComponent(sectionId));
           } catch (error) {
-            status.classList.add("error");
-            status.textContent =
-              error.message ||
-              "Could not send your feedback. Please try again.";
-          } finally {
-            submit.disabled = false;
-            submit.textContent = "Send feedback ↗";
-          }
-        });
-      }
-
-      // --------------------------------------------------
-      // FIXED NAVIGATION: USE REAL REACT ROUTER PATHS
-      // --------------------------------------------------
-
-      // --------------------------------------------------
-      // SPYRIX NAVIGATION — FIX /null/#/login
-      // --------------------------------------------------
-      const loader = document.getElementById("siteLoader");
-
-      function navigateToApp(path) {
-        if (path !== "/login" && path !== "/register") return;
-
-        clearTimeout(window.spyrixIntroLoaderTimer);
-
-        if (loader) {
-          loader.classList.remove("is-hidden");
-        }
-
-        window.spyrixIntroLoaderTimer = setTimeout(() => {
-          // Use the real website origin, not the current /null/ path.
-          const appOrigin = window.location.origin;
-          window.top.location.href = appOrigin + path;
-        }, 1200);
-      }
-
-      // All Get Started buttons go to registration.
-      document.querySelectorAll("[data-enter]").forEach((button) => {
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          navigateToApp("/register");
-        });
-      });
-
-      // Header and footer Login links.
-      function handleLogin(event) {
-        event.preventDefault();
-        navigateToApp("/login");
-      }
-
-      document
-        .getElementById("loginLink")
-        ?.addEventListener("click", handleLogin);
-      document
-        .getElementById("footerLogin")
-        ?.addEventListener("click", handleLogin);
-
-      // Logo returns to the intro home section.
-      document.querySelectorAll(".brand, #footLogo").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-
-          clearTimeout(window.spyrixIntroLoaderTimer);
-
-          document.getElementById("home")?.scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-
-      // Hide the initial loader.
-      window.spyrixIntroLoaderTimer = setTimeout(() => {
-        if (loader) loader.classList.add("is-hidden");
-      }, 2300);
-
-      const yearElement = document.getElementById("yearNow");
-      if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-      }
-
-      // Get started / Create workspace buttons open registration.
-      document.querySelectorAll("[data-enter]").forEach((button) => {
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          navigateToApp("/register");
-        });
-      });
-
-      // Login links open the login page.
-      const login = (event) => {
-        event.preventDefault();
-        navigateToApp("/login");
-      };
-
-      document.getElementById("loginLink")?.addEventListener("click", login);
-      document.getElementById("footerLogin")?.addEventListener("click", login);
-
-      // Clicking the brand returns to the intro page's home section.
-      document.querySelectorAll(".brand, #footLogo").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-
-          if (loader) {
-            loader.classList.remove("is-hidden");
+            console.debug("Section history update skipped:", error);
           }
 
-          clearTimeout(window.spyrixIntroLoaderTimer);
-
-          window.spyrixIntroLoaderTimer = setTimeout(() => {
-            if (loader) {
-              loader.classList.add("is-hidden");
-            }
-          }, 900);
-
-          document.getElementById("home")?.scrollIntoView({
-            behavior: "smooth",
-          });
+          closeMobileMenu();
         });
-      });
 
-      // Hide the initial loader after the page opens.
-      window.spyrixIntroLoaderTimer = setTimeout(() => {
-        if (loader) {
-          loader.classList.add("is-hidden");
-        }
-      }, 2300);
+        /* =========================================
+     SCROLL REVEAL ANIMATIONS
+  ========================================= */
+        const revealElements = document.querySelectorAll(".rv");
 
-      const yearElement = document.getElementById("yearNow");
+        if ("IntersectionObserver" in window) {
+          const revealObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
 
-      if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-      }
-
-      // --------------------------------------------------
-      // MOBILE NAVIGATION MENU
-      // --------------------------------------------------
-      const menuButton = document.getElementById("menuBtn");
-      const nav = document.getElementById("navLinks");
-
-      if (menuButton && nav) {
-        menuButton.addEventListener("click", () => {
-          const isOpen = nav.classList.toggle("open");
-
-          menuButton.setAttribute("aria-expanded", String(isOpen));
-          menuButton.setAttribute(
-            "aria-label",
-            isOpen ? "Close navigation" : "Open navigation",
-          );
-          menuButton.textContent = isOpen ? "×" : "☰";
-        });
-      }
-
-      // --------------------------------------------------
-      // SCROLL TO INTRO SECTIONS
-      // --------------------------------------------------
-      function scrollToIntroSection(target) {
-        if (!target) return;
-
-        const header = document.querySelector(".top");
-        const headerHeight = header?.getBoundingClientRect().height || 0;
-
-        const targetTop =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          headerHeight -
-          14;
-
-        const reduceMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-
-        window.scrollTo({
-          top: Math.max(0, targetTop),
-          behavior: reduceMotion ? "auto" : "smooth",
-        });
-      }
-
-      document.addEventListener("click", (event) => {
-        if (event.defaultPrevented) return;
-
-        const link = event.target.closest?.('a[href^="#"]');
-
-        if (
-          !link ||
-          link.id === "footLogo" ||
-          link.classList.contains("brand")
-        ) {
-          return;
-        }
-
-        const href = link.getAttribute("href");
-
-        if (!href || href === "#") return;
-
-        let sectionId;
-
-        try {
-          sectionId = decodeURIComponent(href.slice(1));
-        } catch {
-          sectionId = href.slice(1);
-        }
-
-        const target = document.getElementById(sectionId);
-
-        if (!target) return;
-
-        event.preventDefault();
-        scrollToIntroSection(target);
-
-        // Keep the section fragment inside the intro document.
-        try {
-          history.replaceState(null, "", "#" + encodeURIComponent(sectionId));
-        } catch (_) {}
-
-        // Close the mobile menu after selecting a section.
-        if (nav?.classList.contains("open")) {
-          nav.classList.remove("open");
-
-          if (menuButton) {
-            menuButton.setAttribute("aria-expanded", "false");
-            menuButton.setAttribute("aria-label", "Open navigation");
-            menuButton.textContent = "☰";
-          }
-        }
-      });
-
-      // --------------------------------------------------
-      // REVEAL ELEMENTS WHEN THEY ENTER THE VIEWPORT
-      // --------------------------------------------------
-      if ("IntersectionObserver" in window) {
-        const revealObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
                 entry.target.classList.add("in");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12 },
-        );
+                revealObserver.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.12 },
+          );
 
-        document.querySelectorAll(".rv").forEach((element, index) => {
-          element.style.transitionDelay = (index % 3) * 90 + "ms";
-          revealObserver.observe(element);
-        });
+          revealElements.forEach((element, index) => {
+            element.style.transitionDelay = (index % 3) * 90 + "ms";
+            revealObserver.observe(element);
+          });
+        } else {
+          revealElements.forEach((element) => {
+            element.classList.add("in");
+          });
+        }
 
-        // Update the active navigation link as sections enter view.
-        if (nav) {
-          const navLinks = [...nav.querySelectorAll('a[href^="#"]')];
+        /* =========================================
+     ACTIVE NAVIGATION LINK
+  ========================================= */
+        if ("IntersectionObserver" in window && nav) {
+          const navLinks = Array.from(nav.querySelectorAll("a"));
 
           const sectionObserver = new IntersectionObserver(
             (entries) => {
@@ -2154,10 +2198,10 @@
                 if (!entry.isIntersecting) return;
 
                 navLinks.forEach((link) => {
-                  link.classList.toggle(
-                    "on",
-                    link.getAttribute("href") === "#" + entry.target.id,
-                  );
+                  const active =
+                    link.getAttribute("href") === "#" + entry.target.id;
+
+                  link.classList.toggle("on", active);
                 });
               });
             },
@@ -2166,95 +2210,79 @@
 
           ["home", "toolkit", "how-it-works", "faq", "about"].forEach((id) => {
             const section = document.getElementById(id);
-
-            if (section) {
-              sectionObserver.observe(section);
-            }
+            if (section) sectionObserver.observe(section);
           });
         }
-      } else {
-        // Older browser fallback.
-        document.querySelectorAll(".rv").forEach((element) => {
-          element.classList.add("in");
-        });
-      }
 
-      // --------------------------------------------------
-      // SVG CARD FRAMES
-      // --------------------------------------------------
-      const SVG_NS = "http://www.w3.org/2000/svg";
+        /* =========================================
+     SVG CARD FRAMES
+  ========================================= */
+        const SVG_NS = "http://www.w3.org/2000/svg";
 
-      function buildCardFrame(element) {
-        const width = element.offsetWidth;
-        const height = element.offsetHeight;
-        const notch = 30;
-        const radius = 14;
+        function buildCardFrame(element) {
+          const width = element.offsetWidth;
+          const height = element.offsetHeight;
 
-        if (!width || !height) return;
+          const notch = 30;
+          const radius = 14;
 
-        const path = [
-          `M${radius} 0`,
-          `H${width - notch}`,
-          `L${width} ${notch}`,
-          `V${height - radius}`,
-          `Q${width} ${height} ${width - radius} ${height}`,
-          `H${radius}`,
-          `Q0 ${height} 0 ${height - radius}`,
-          `V${radius}`,
-          `Q0 0 ${radius} 0Z`,
-        ].join("");
+          if (!width || !height) return;
 
-        let frame = element.querySelector("svg.fr");
+          const path = [
+            `M${radius} 0`,
+            `H${width - notch}`,
+            `L${width} ${notch}`,
+            `V${height - radius}`,
+            `Q${width} ${height} ${width - radius} ${height}`,
+            `H${radius}`,
+            `Q0 ${height} 0 ${height - radius}`,
+            `V${radius}`,
+            `Q0 0 ${radius} 0Z`,
+          ].join(" ");
 
-        if (!frame) {
-          frame = document.createElementNS(SVG_NS, "svg");
-          element.insertBefore(frame, element.firstChild);
-        }
+          let svg = element.querySelector("svg.fr");
 
-        frame.setAttribute("class", "fr");
-        frame.setAttribute("viewBox", `0 0 ${width} ${height}`);
-        frame.setAttribute("aria-hidden", "true");
-        frame.setAttribute("preserveAspectRatio", "none");
+          if (!svg) {
+            svg = document.createElementNS(SVG_NS, "svg");
+            svg.setAttribute("class", "fr");
+            svg.setAttribute("aria-hidden", "true");
+            element.insertBefore(svg, element.firstChild);
+          }
 
-        const fill = element.classList.contains("red") ? "none" : "#fff";
+          svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+          svg.setAttribute("preserveAspectRatio", "none");
 
-        frame.innerHTML = `
-      <path d="${path}" fill="${fill}" class="bd"></path>
-      <path
-        class="sd"
-        d="M${width - notch} 0 L${width} ${notch} H${width - notch} Z"
-      ></path>
-      <path
-        class="kn"
-        d="M10 ${height - 34} V${height - 10} H34"
-      ></path>
-      <path
-        class="kn"
+          const isRed = element.classList.contains("red");
+          const fill = isRed ? "none" : "#fff";
+
+          svg.innerHTML = `
+      <path d="${path}" fill="${fill}" class="bd"/>
+      <path class="sd"
+        d="M${width - notch} 0 L${width} ${notch} H${width - notch} Z"/>
+      <path class="kn"
+        d="M10 ${height - 34} V${height - 10} H34"/>
+      <path class="kn"
         d="M${width - 34} ${height - 10} H${width - 10} V${height - 34}"
-        opacity=".5"
-      ></path>
+        opacity=".5"/>
     `;
+        }
 
-        element.style.clipPath = "none";
-      }
+        const framedCards = document.querySelectorAll(".frame");
 
-      if ("ResizeObserver" in window) {
-        const frameObserver = new ResizeObserver((entries) => {
-          entries.forEach((entry) => {
-            buildCardFrame(entry.target);
+        if ("ResizeObserver" in window) {
+          const resizeObserver = new ResizeObserver((entries) => {
+            entries.forEach((entry) => buildCardFrame(entry.target));
           });
-        });
 
-        document.querySelectorAll(".frame").forEach((element) => {
-          frameObserver.observe(element);
-        });
-      } else {
-        document.querySelectorAll(".frame").forEach(buildCardFrame);
+          framedCards.forEach((card) => resizeObserver.observe(card));
+        } else {
+          framedCards.forEach(buildCardFrame);
 
-        window.addEventListener("resize", () => {
-          document.querySelectorAll(".frame").forEach(buildCardFrame);
-        });
-      }
+          window.addEventListener("resize", () => {
+            framedCards.forEach(buildCardFrame);
+          });
+        }
+      })();
     </script>
   </body>
 </html>
